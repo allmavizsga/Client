@@ -11,15 +11,15 @@ const HomeIcon = styled.button.attrs({
 }) `
     border: none;
     background: #2F4F4F;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 `;
 
 const DropDownContent = styled.div `
     display: none;
     position: absolute;
     background-color: #EAEAEA;
-    min-width: 160px;
+    min-width: 140px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 
@@ -37,6 +37,7 @@ const MenuItem = styled.a `
     text-decoration: none;
     font-size: 24px;
     padding-right: 20px;
+    width: 140px;
 
     &:visited {
         text-decoration: none;
@@ -60,6 +61,7 @@ const MenuItem = styled.a `
 const MenuItemHome = MenuItem.extend `
     float: left;
     margin-left: 15px;
+    
 `;
 
 const LabelForResponsive = styled.label `
@@ -148,7 +150,10 @@ const DropBtn = styled.div `
     font-size: 24px;    
     outline: none;
     display: inherit;
+    
 `;
+
+var visibility_expression = "visibil";
 
 const DropDown = styled.div `
     display: inline;
@@ -158,6 +163,7 @@ const DropDown = styled.div `
     margin: 0;
     float: none;
     overflow: hidden;
+    visibility: ${visibility_expression}
 
     &:hover{
          ${DropDownContent}{
@@ -165,6 +171,8 @@ const DropDown = styled.div `
          }
     }
 `;
+
+
 
 const Content = styled.div `
     overflow: hidden;
@@ -184,12 +192,22 @@ const NavigationBar = (props) => {
                          Dictionary
                     </MenuItemHome>
                     <Content>
-                        <MenuItem href="/sign_in"> Sign In </MenuItem>
+                        <MenuItem href="/game"> Game </MenuItem>
+                        <MenuItem href="/sign_out"> Sign Out </MenuItem>
+                        <MenuItem>
+                            <DropDown>
+                                <DropBtn> Sign In </DropBtn>
+                                <DropDownContent>
+                                    <DropDownItem href="/sign_in_user"> Sign in as a user  </DropDownItem>
+                                    <DropDownItem href="/sign_in_guest"> Sign in as a guest </DropDownItem>
+                                </DropDownContent>
+                            </DropDown>
+                        </MenuItem>
                         <MenuItem>
                             <DropDown>
                                 <DropBtn> Expressions </DropBtn>
                                 <DropDownContent>
-                                    <DropDownItem href="/new_expression"> Add new  </DropDownItem>
+                                    <DropDownItem href="/new_expression"> Allow new  </DropDownItem>
                                     <DropDownItem href="/delete_expression"> Delete </DropDownItem>
                                     <DropDownItem href="/idk"> I don't know </DropDownItem>
                                 </DropDownContent>

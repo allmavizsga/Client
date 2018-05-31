@@ -41,7 +41,8 @@ class SignUp extends Component {
         return (
             <form>
                 <div className="form-row">
-                    <div className="form-group col-md-6">
+                    <p>
+                        <div className="form-group col-md-4">
                         <label for="inputEmail4">Email</label>
                         <input type="email" 
                                className="form-control"  
@@ -50,7 +51,8 @@ class SignUp extends Component {
                                value={this.state.email}
                                onChange={ (e) => this.fieldChange('email',e)}/>
                     </div>
-                    <div className="form-group col-md-6">
+                    </p>
+                    <div className="form-group col-md-4">
                         <label for="inputPassword4">Password</label>
                         <input type="password" 
                                className="form-control" 
@@ -60,7 +62,7 @@ class SignUp extends Component {
                                onChange={ (e) => this.fieldChange('password',e)}/>
                     </div>
                 </div>
-                <div className="form-group">
+                <div className="form-group  col-md-4">
                     <label for="inputAddress">Address</label>
                     <input type="text" 
                         className="form-control" 
@@ -69,7 +71,7 @@ class SignUp extends Component {
                         value={this.state.address1}
                         onChange={ (e) => this.fieldChange('address1',e)}/>
                 </div>
-                <div className="form-group">
+                <div className="form-group  col-md-4">
                     <label for="inputAddress2">Address 2</label>
                     <input type="text" 
                         className="form-control" 
@@ -79,7 +81,7 @@ class SignUp extends Component {
                         onChange={ (e) => this.fieldChange('address2', e)}/>
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md-6">
+                    <div className="form-group col-md-4">
                         <label for="inputCity">City</label>
                         <input type="text" 
                             className="form-control" 
@@ -90,18 +92,19 @@ class SignUp extends Component {
                     <div className="form-group col-md-4">
                         <label for="inputState">State</label>
                         <select id="inputState" className="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
+                            <option selected value='romania'>Romania</option>
+                            <option  value='magyarorszag'>Magyarorszag</option>
+                            <option  value='other'>Other</option>
                         </select>
                     </div>
-                    <div className="form-group col-md-2">
+                    {/* <div className="form-group col-md-2">
                         <label for="inputZip">Zip</label>
                         <input type="text" 
                             className="form-control" 
                             id="inputZip"
                             value={this.state.zip}
                             onChange={ (e) => this.fieldChange('zip', e)}/>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="form-group">
                     <div className="form-check">
@@ -118,7 +121,7 @@ class SignUp extends Component {
                 <button type="submit" 
                         className="btn btn-primary"
                         onClick={ (e) => this.onSubmit(e)}>
-                        Sign in
+                        Sign up
                 </button>
             </form>
         )

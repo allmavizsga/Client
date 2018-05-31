@@ -11,7 +11,7 @@ const TemporaryMessage = styled.div `
     font-size: 50px;
     padding-top: 350px;
 `
-class AddNewExpression extends Component {
+class AllowNewExpression extends Component {
  
     render(){
         return (
@@ -22,4 +22,4 @@ class AddNewExpression extends Component {
     }
 }
 
-export default AddNewExpression;
+export default AllowNewExpression;
