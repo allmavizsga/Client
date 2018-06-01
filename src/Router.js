@@ -9,6 +9,9 @@ import SignOut from './routes/SignOut';
 import Translate from './routes/Translate';
 import Game from './routes/Game';
 import DeleteExpression from './routes/DeleteExpression';
+import DeleteUser from './routes/DeleteUser';
+import DeleteWord from './routes/DeleteWord';
+import DeleteTold from './routes/DeleteTold';
 import AllowNewExpression from './routes/AllowNewExpression';
 import PageNotFound from './routes/PageNotFound';
 
@@ -24,6 +27,9 @@ class Router extends Component {
                     <Route exact path="/sign_out" render={ (props) => <SignOut {...props}/>} />
                     <Route exact path="/new_expression" render={ (props) => <AllowNewExpression {...props} />} />
                     <Route exact path="/delete_expression" render={ (props) => <DeleteExpression {...props}/>} />
+                    <Route exact path="/delete_expression/user" render={ (props) => <DeleteUser {...props}/>} />
+                    <Route exact path="/delete_expression/word" render={ (props) => <DeleteWord {...props}/>} />
+                    <Route exact path="/delete_expression/told" render={ (props) => <DeleteTold {...props}/>} />
                     <Route exact path="/translate" render={ (props) => <Translate {...props}/>} />
                     <Route exact path="/game" render={ (props) => <Game {...props}/>} />
                     <Route render={ (props) => <PageNotFound {...props}/>} />

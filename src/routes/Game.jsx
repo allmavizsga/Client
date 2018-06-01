@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import swal from 'sweetalert2-react';
 
 class Game extends Component {
  
@@ -6,47 +7,47 @@ class Game extends Component {
         super(props);
         this.state = {
             word: ['en','te','o'],
-            translated: ''
+            temp: [ {english: 'how are you', hungarian: 'hogy vagy'},{english: 'how are you', hungarian: 'hogy vagy'} ],
+            actualTransleted: '',
+            hungarianExp: []
         }
-    }
-
-    translatedChange(i,e){
-        const newState = Object.assign(this.state, {
-            ['translated']: e.target.value
-        });
-        this.setState(newState);
-        console.log(newState);
     }
 
     onSubmitNextWord(e){
         console.log("The next word button was clicked!");
+        const temp = this.state.temp;
+        temp.hungarian = this.state.hungarianExp;
     }
 
+    onChangeSolution(event, index){
+        console.log('index: ', index)
+        const temp = this.state.hungarianExp;
+        temp[index] = event.target.value;
+        this.setState({hungarianExp: temp});
+        console.log(this.state.hungarianExp)
+    }
+
+
     render(){
-        return (
-            <from>
-                {/* <div>
-                    <div className="form-group col-md-4">
-                        <label>Word:</label>
-                        <label for="inputWord">{[this.word]}</label>
-                    </div>
-                    <div className="form-group col-md-4">
-                        <label for="inputTranslated">Translated:</label>
+        const expressions = this.state.temp.map((current, index) => {
+            return (
+                <tr>
+                    <th scope="row">{index+1}</th>
+                    <td>{current.english}</td>
+                    <td>
                         <input type="text" 
                             className="form-control" 
                             id="inputTranslated" 
-                            placeholder="Write the word!"
-                            value={this.state.translated}
-                            onChange={ (e) => this.translatedChange(e)}/>
-                    </div>
-                    <div>
-                        <button type="submit" 
-                            className="btn btn-primary"
-                            onClick={ (e) => this.onSubmitNextWord(e)}>
-                            Next word
-                        </button>
-                    </div>
-                </div> */}
+                            key={index}
+                            value={this.state.hungarianExp[index]}
+                            onChange={ (e) => this.onChangeSolution(e, index)}/>
+                    </td>
+                </tr>
+                
+            )
+        })
+        return (
+            <from>
                 <table className="table table-sm">
                     <thead>
                         <tr>
@@ -56,36 +57,19 @@ class Game extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>{this.state.word[0]}</td>
-                            <td>
-                                <input type="text" 
-                                    className="form-control" 
-                                    id="inputTranslated" 
-                                    placeholder="Write the word!"
-                                    value={this.state.translated}
-                                    onChange={ (e) => this.translatedChange(0,e)}/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>{this.state.word[1]}</td>
-                            <td>Thornton</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td >{this.state.word[2]}</td>
-                            <td>@twitter</td>
-                        </tr>
+                        {expressions}
                     </tbody>
                 </table>
                 <div>
                     <button type="submit" 
                         className="btn btn-primary"
                         onClick={ (e) => this.onSubmitNextWord(e)}>
-                        Next word
+                        Send
                     </button>
+                </div>
+                <div className="inline">
+                    <a href={`/translate`}
+                    className='btn btn-danger'><i className="fa fa-trash" aria-hidden="true"></i> Close</a>
                 </div>
             </from>
         )

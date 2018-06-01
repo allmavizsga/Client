@@ -11,8 +11,8 @@ const HomeIcon = styled.button.attrs({
 }) `
     border: none;
     background: #2F4F4F;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
 `;
 
 const DropDownContent = styled.div `
@@ -60,8 +60,8 @@ const MenuItem = styled.a `
 
 const MenuItemHome = MenuItem.extend `
     float: left;
-    margin-left: 15px;
-    
+    margin-left: 20px;
+    width: 180px;
 `;
 
 const LabelForResponsive = styled.label `
