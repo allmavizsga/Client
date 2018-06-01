@@ -22,7 +22,7 @@ class DeleteUser extends Component {
     }
 
     back(){
-        this.props.history.push("/dlete_epression");
+        this.props.history.push("/delete_expression");
     }
 
     fieldChange(event){
@@ -41,6 +41,12 @@ class DeleteUser extends Component {
     }
 
     render(){
+        const expressions = this.state.temp.map((current) => {
+            return (
+                <label>Email: {current.email}, Address: {current.address1}, {current.address2}, {current.city}</label>
+                
+            )
+        })
         return (
             <div>
                 <div className="form-group col-md-4">
@@ -56,17 +62,20 @@ class DeleteUser extends Component {
                         onClick={ (e) => this.search(e)}>
                         Search
                     </button>
-                </div>
-                <div>
-                    <label >
-                       fasz
-                    </label>
                     <button type="submit" 
                         hidden
                         className="btn btn-primary"
                         onClick={ (e) => this.dletete(e)}>
                         Delete
                     </button>
+                </div>
+                <div>
+                    <label >
+                       He/she is it
+                    </label>
+                </div>
+                <div>
+                    {expressions}
                 </div>
             </div>
         )

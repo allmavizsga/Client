@@ -52,7 +52,7 @@ class SignUp extends Component {
                                 placeholder="Email"
                                 value={this.state.email}
                                 onChange={ (e) => this.fieldChange('email',e)}/>
-                        </div>
+                            </div>
                         </p>
                         <div className="form-group col-md-4">
                             <label for="inputPassword4">Password</label>
