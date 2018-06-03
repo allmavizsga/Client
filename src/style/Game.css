@@ -1,0 +1,29 @@
+
+.form-control-game{
+    margin: 20px;
+    width: 50%;
+    height: 30px;
+}
+
+.tHeader{
+    font-size: 20px;
+}
+
+.game{
+    height: 50px;
+}
+
+.rowsGame {
+    vertical-align:50%;
+    height: 10%;
+    font-size: 20px;
+
+}
+
+.btn-danger{
+    margin-left: 14%;
+    width: 200px;
+    height: 75px;
+    font-size: 30px;
+    color: black;
+}

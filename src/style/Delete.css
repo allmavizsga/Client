@@ -1,0 +1,22 @@
+
+.form-rowIn {
+    display: flex;
+    margin-left: 7%;
+    height: 100px;
+}
+
+.deletBut{
+    margin-left: 12%;
+    width: 200px;
+    height: 75px;
+    font-size: 30px;
+    color: black;
+}
+
+.delLabHeader{
+    font-size: 30px;
+}
+
+label{
+    font-size: 15px
+}

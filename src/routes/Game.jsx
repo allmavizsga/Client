@@ -1,6 +1,7 @@
 import React , { Component } from 'react';
 import swal from 'sweetalert2-react';
 import Modal from 'react-modal';
+import '../style/Game.css'
 
 const customStyles = {
     content : {
@@ -19,10 +20,12 @@ class Game extends Component {
     constructor(props){
         super(props);
         this.state = {
-            temp: [ {english: 'how are you', hungarian: 'hogy vagy'},{english: 'how are you', hungarian: 'hogy vagy'} ],
+            temp: [ {english: 'how are you', hungarian: 'hogy vagy', result:'Good'},{english: 'how are you', hungarian: 'hogy vagy', result:'Good'} ],
+            color: ['#FF0000',"#00FF00"],
             hungarianExp: [],
             modalIsOpen: false,
-            result: '18/20 '
+            results: '18/20 ',
+            resultVisibil: ''
         }
     }
 
@@ -30,8 +33,12 @@ class Game extends Component {
         console.log("The next word button was clicked!");
         const temp = this.state.temp;
         temp.hungarian = this.state.hungarianExp;
-        const openChange = Object.assign(this.state, {modalIsOpen: false});
-        this.setState(openChange);
+        temp.resultVisibil = "Result";
+        temp.modalIsOpen = true;
+        this.setState(temp);
+        // const openChange = Object.assign(this.state, {modalIsOpen: true});
+        // this.setState(openChange);
+        
     }
 
     onChangeSolution(event, index){
@@ -41,10 +48,11 @@ class Game extends Component {
         this.setState({hungarianExp: temp});
         console.log(this.state.hungarianExp)
     }
-
-    openModal() {
-        const temp = Object.assign(this.state, {modalIsOpen: true});
+    closeModal() {
+        const temp = Object.assign(this.state, {modalIsOpen: false});
         this.setState(temp);
+        //this.props.historypush("/game");
+        
     }
   
     afterOpenModal() {
@@ -55,6 +63,8 @@ class Game extends Component {
     newGame() {
         const temp = this.state;
         temp.hungarianExp = [];
+        temp.temp.english = [];
+        temp.temp.result = [];
         this.setState(temp);
         
     }
@@ -68,15 +78,23 @@ class Game extends Component {
         const expressions = this.state.temp.map((current, index) => {
             return (
                 <tr>
-                    <th scope="row">{index+1}</th>
-                    <td>{current.english}</td>
-                    <td>
+                    <th className="rowsGame" scope="row">{index+1}</th>
+                    <td className="rowsGame" >{current.english}</td>
+                    <td className="rowsGame" >
                         <input type="text" 
-                            className="form-control" 
+                            className="form-control-game" 
                             id="inputTranslated" 
+                            placeholder="Translated word!"
                             key={index}
                             value={this.state.hungarianExp[index]}
                             onChange={ (e) => this.onChangeSolution(e, index)}/>
+                    </td>
+                    <td id="resulr"
+                        className="rowsGame"  
+                        align="center"  
+                        visibility="hidden"
+                        bgcolor = {this.state.color[index]}>
+                        {current.result}
                     </td>
                 </tr>
                 
@@ -88,9 +106,10 @@ class Game extends Component {
                     <table className="table table-sm">
                         <thead>
                             <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Word</th>
-                            <th scope="col">Translated</th>
+                            <th className="tHeader" scope="col">Number</th>
+                            <th className="tHeader" scope="col">Word</th>
+                            <th className="tHeader" scope="col">Translated</th>
+                            <th className="tHeader" id="result" align="center" >{this.state.resultVisibil}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,24 +117,25 @@ class Game extends Component {
                         </tbody>
                     </table>
                     <div>
-                        
-                        <button onClick={() =>this.send()}>Send</button>
+                        <a className='game btn-primary' 
+                            onClick={() =>this.send()}> Send 
+                        </a>
                         <Modal
                             isOpen={this.state.modalIsOpen}
                             //onAfterOpen={this.afterOpenModal()}
-                            //onRequestClose={this.closeModal()}
                             style={customStyles}
-                            contentLabel="Example Modal">
+                            contentLabel="Results">
                             <h3 ref={subtitle => this.subtitle = subtitle}>Your result</h3>
-                            <div>{this.state.result}</div>
+                            <div>{this.state.results}</div>
                             <form>
-                            <button onClick={() => this.closeModal()}>close</button>
-                            <button onClick={() => this.back()}>End game</button>
+                            <button onClick={() => this.closeModal()}> Close </button>
+                            <button onClick={() => this.back()}> End game </button>
                             </form>
                         </Modal>
-                        <button onClick={() =>this.newGame()}>New Game</button>
+                        <a href={`/game`}
+                            className='game btn-primary'> New Game </a>
                         <a href={`/translate`}
-                        className='btn btn-danger'><i className="fa fa-trash" aria-hidden="true"></i> Close</a>
+                            className='game btn-danger'> Close </a>
                     </div>
                 </div>
             </from>

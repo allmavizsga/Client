@@ -1,0 +1,9 @@
+.backround{
+    background-color: aqua;
+}
+
+div{
+    background-image: url('../public/owl.png');
+    background-repeat: no-repeat;
+
+}

@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-
+import '../style/Delete.css'
 
 
 class DeleteUser extends Component {
@@ -9,14 +9,14 @@ class DeleteUser extends Component {
         super(props);
         this.state = {
             userEmail: '',
-            temp: [{email: 's',
-                password: 'a',
-                address1: 'n',
-                address2: 't',
-                city: 'a',
-                state: ''}],
-            deleteButtonVisibility: 'hidden'
-
+            temp: [{email: 'asdjlfjasljas@sjkfsf.asd',
+                password: 'sfasfafafsa',
+                address1: 'sfasfasdasddasasdn',
+                address2: 'asdasdasdasdasdt',
+                city: 'aasdasdasdasda',
+                state: 'sdadasdsd   '}],
+            deleteButtonVisibility: false
+            
         }
 
     }
@@ -28,7 +28,7 @@ class DeleteUser extends Component {
     fieldChange(event){
         const userEm = this.state;
         userEm.userEmail = event.target.value;
-        userEm.deleteButtonVisibility = 'hidden'
+        userEm.deleteButtonVisibility = false;
         this.setState(userEm);
         console.log(userEm)
     }
@@ -36,9 +36,16 @@ class DeleteUser extends Component {
     search(e){
         console.log('Seaching');
         const visibilityy = this.state;
-        visibilityy.deleteButtonVisibility = "visible";
-        this.setState({visibilityy});
+        visibilityy.deleteButtonVisibility = true;
+        this.setState(visibilityy);
+        console.log(visibilityy);
     }
+
+    delete(){
+        console.log("Delete user");
+    }
+
+
 
     render(){
         const expressions = this.state.temp.map((current) => {
@@ -49,34 +56,50 @@ class DeleteUser extends Component {
         })
         return (
             <div>
-                <div className="form-group col-md-4">
-                    <label>Search by useremail: </label>
-                    <input type="email" 
-                        className="form-control"  
-                        id="inputEmail4" 
-                        placeholder="Email"
-                        value={this.state.userEmail}
-                        onChange={ (e) => this.fieldChange(e)}/> 
+                <div className="form-row ">
+                </div>
+                <div className="form-row ">
+                    <div className="form-group col-md-4">
+                        <label className="delLabHeader">Search by useremail: </label>
+                        <input type="email" 
+                            className="form-control"  
+                            id="inputEmail4" 
+                            placeholder="Email"
+                            value={this.state.userEmail}
+                            onChange={ (e) => this.fieldChange(e)}/> 
+                    </div>
+                    <div className="form-group col-md-8">
+                        <div>
+                            <label className="delLabHeader">
+                            He/she is it:
+                            </label>
+                        </div>
+                        <div>
+                            {expressions}
+                        </div>
+                    </div>
+                </div>
+                <div className="form-row ">
+                </div>
+                <div>
                     <button type="submit" 
-                        className="btn btn-primary"
+                        className="deletBut btn-primary"
                         onClick={ (e) => this.search(e)}>
                         Search
                     </button>
                     <button type="submit" 
-                        hidden
-                        className="btn btn-primary"
-                        onClick={ (e) => this.dletete(e)}>
+                        className="deletBut btn-primary"
+                        onClick={ (e) => this.delete(e)}>
+                        <i className="fa fa-trash" aria-hidden="false"></i>
                         Delete
                     </button>
+                    <button type="submit" 
+                        className="deletBut btn-primary"
+                        onClick={ () => this.back()}>
+                        Back
+                    </button>
                 </div>
-                <div>
-                    <label >
-                       He/she is it
-                    </label>
-                </div>
-                <div>
-                    {expressions}
-                </div>
+                
             </div>
         )
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../style/SignIn.css'
 
 //  this is just a temporary div. If you don't wanna to use styled components, you can 
 //  adjust your own components with explicit css files, using the 'className' attribute of the tags.
@@ -32,7 +32,9 @@ class SignInUser extends Component {
     render(){
         return(
             <form>
-                <div className="form-row">
+                <div className="form-rowIn">
+                </div>
+                <div className="form-rowIn">
                     <div className="form-group col-md-4">
                         <label for="inputEmail4">Email</label>
                         <input type="email" 
@@ -42,6 +44,8 @@ class SignInUser extends Component {
                                value={this.state.email}
                                onChange={ (e) => this.fieldChange('email',e)}/>
                     </div>
+                </div>
+                <div className="form-rowIn">
                     <div className="form-group col-md-4">
                         <label for="inputPassword4">Password</label>
                         <input type="password" 
@@ -52,9 +56,11 @@ class SignInUser extends Component {
                                onChange={ (e) => this.fieldChange('password',e)}/>
                     </div>
                 </div>
+                <div className="form-rowIn">
+                </div>
                 <div>
                      <button type="submit" 
-                        className="btn btn-primary"
+                        className="btn-primary"
                         onClick={ (e) => this.onSubmit(e)}>
                         Sign in
                     </button>

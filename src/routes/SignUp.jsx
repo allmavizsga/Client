@@ -1,4 +1,13 @@
 import React, {Component} from 'react';
+import styled from 'styled-components';
+import '../style/SignUp.css'
+
+const label = styled.div`
+    background-color:lightblue;
+    color:white
+`;
+
+
 
 class SignUp extends Component {
     
@@ -39,21 +48,19 @@ class SignUp extends Component {
 
     render(){
         return (
-            <div>
-                <hr />
                 <form>
-                    <div className="form-row">
-                        <p>
-                            <div className="form-group col-md-4">
-                            <label for="inputEmail4">Email</label>
+                    <div className="form-row ">
+                    </div>
+                    <div className="form-row ">
+                        <div className="form-group col-md-4">
+                            <label className="primaryLabel" for="inputEmail4">Email</label>
                             <input type="email" 
                                 className="form-control"  
                                 id="inputEmail4" 
                                 placeholder="Email"
                                 value={this.state.email}
                                 onChange={ (e) => this.fieldChange('email',e)}/>
-                            </div>
-                        </p>
+                        </div>
                         <div className="form-group col-md-4">
                             <label for="inputPassword4">Password</label>
                             <input type="password" 
@@ -64,6 +71,7 @@ class SignUp extends Component {
                                 onChange={ (e) => this.fieldChange('password',e)}/>
                         </div>
                     </div>
+                    <div className="form-row">
                     <div className="form-group  col-md-4">
                         <label for="inputAddress">Address</label>
                         <input type="text" 
@@ -82,12 +90,14 @@ class SignUp extends Component {
                             value={this.state.address2}
                             onChange={ (e) => this.fieldChange('address2', e)}/>
                     </div>
+                    </div>
                     <div className="form-row">
                         <div className="form-group col-md-4">
                             <label for="inputCity">City</label>
                             <input type="text" 
                                 className="form-control" 
                                 id="inputCity"
+                                placeholder = "City"
                                 value={this.state.city}
                                 onChange={ (e) => this.fieldChange('city', e)}/>
                         </div>
@@ -107,26 +117,29 @@ class SignUp extends Component {
                                 value={this.state.zip}
                                 onChange={ (e) => this.fieldChange('zip', e)}/>
                         </div> */}
+                        
                     </div>
-                    <div className="form-group">
-                        <div className="form-check">
-                            <input className="form-check-input" 
-                                type="checkbox" 
-                                id="gridCheck"
-                                checked={this.state.checkmeout}
-                                onChange={ (e) => this.fieldChange('checkmeout', e)}/>
-                            <label className="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
-                        </div>
+                    <div className="checkMe">
+                            <div className="form-check">
+                                <label></label>
+                                <input className="form-check-input" 
+                                    type="checkbox" 
+                                    id="gridCheck"
+                                    checked={this.state.checkmeout}
+                                    onChange={ (e) => this.fieldChange('checkmeout', e)}/>
+                                <label className="form-check-label" for="gridCheck">
+                                    Check me out
+                                </label>
+                            </div>
                     </div>
+                    <div className="div_Button">
                     <button type="submit" 
                             className="btn btn-primary"
                             onClick={ (e) => this.onSubmit(e)}>
                             Sign up
                     </button>
+                    </div>
                 </form>
-            </div>
         )
     }
 }

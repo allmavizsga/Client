@@ -37,7 +37,7 @@ const MenuItem = styled.a `
     text-decoration: none;
     font-size: 24px;
     padding-right: 20px;
-    width: 140px;
+    width: auto;/*140px;*/
 
     &:visited {
         text-decoration: none;
@@ -207,8 +207,8 @@ const NavigationBar = (props) => {
                             <DropDown>
                                 <DropBtn> Expressions </DropBtn>
                                 <DropDownContent>
-                                    <DropDownItem href="/new_expression"> Allow new  </DropDownItem>
-                                    <DropDownItem href="/delete_expression"> Delete </DropDownItem>
+                                    <DropDownItem href="/new_expression">  Allow new   </DropDownItem>
+                                    <DropDownItem href="/delete_expression">  Delete  </DropDownItem>
                                     <DropDownItem href="/idk"> I don't know </DropDownItem>
                                 </DropDownContent>
                             </DropDown>

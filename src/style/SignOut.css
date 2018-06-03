@@ -1,0 +1,15 @@
+
+.form_out {
+    background-image: url('owl.png');
+}
+
+
+.out{
+    position: relative;
+    margin-left: 14%;
+    width: 200px;
+    height: 75px;
+    font-size: 30px;
+    color: black;
+    background-color: rgb(36, 224, 45);
+}

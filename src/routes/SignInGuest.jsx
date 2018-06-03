@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../style/SignIn.css'
 
 
 //  this is just a temporary div. If you don't wanna to use styled components, you can 
@@ -32,6 +33,8 @@ class SignInGuest extends Component {
         return(
             <form>
                 <div className="form-row">
+                </div>
+                <div className="form-rowIn">
                     <div className="form-group col-md-4">
                         <label for="inputname">Name</label>
                         <input type="text" 
@@ -42,9 +45,11 @@ class SignInGuest extends Component {
                                onChange={ (e) => this.fieldChange('username',e)}/>
                     </div>
                 </div>
+                <div className="form-row">
+                </div>
                 <div>
                      <button type="submit" 
-                        className="btn btn-primary"
+                        className="btn-primary"
                         onClick={ (e) => this.onSubmit(e)}>
                         Sign in
                     </button>
