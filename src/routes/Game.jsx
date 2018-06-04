@@ -135,7 +135,7 @@ class Game extends Component {
                         <a href={`/game`}
                             className='game btn-primary'> New Game </a>
                         <a href={`/translate`}
-                            className='game btn-danger'> Close </a>
+                            className='gamedanger btn-danger'> Close </a>
                     </div>
                 </div>
             </from>

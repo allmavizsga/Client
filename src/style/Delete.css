@@ -10,7 +10,7 @@
     width: 200px;
     height: 75px;
     font-size: 30px;
-    color: black;
+    color: white;
 }
 
 .delLabHeader{
@@ -19,4 +19,20 @@
 
 label{
     font-size: 15px
+}
+
+.deletebuttonback{
+    margin-left:40%;
+    width: 210px;
+    height: 75px;
+    font-size: 30px;
+    color: white;
+}
+
+.deletebutton{
+    margin-left: 12%;
+    width: 210px;
+    height: 75px;
+    font-size: 30px;
+    color: white;
 }

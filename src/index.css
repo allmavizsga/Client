@@ -2,8 +2,8 @@
     background-color: aqua;
 }
 
-div{
-    background-image: url('../public/owl.png');
+body{
+    background-image: url('owl2.png');
     background-repeat: no-repeat;
 
 }

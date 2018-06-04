@@ -117,7 +117,7 @@ class Translate extends Component {
                             value={[this.state.translated]}/>
                     </div>
                     <div>
-                        <button type="submit" 
+                        <button type="button" 
                             className="btn btn-primary"
                             onClick={ (e) => this.onSubmitTranslation(e)}>
                             Translation
@@ -126,7 +126,7 @@ class Translate extends Component {
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-4">
-                        <button type="submit" 
+                        <button type="button" 
                             className="btn btn-primary"
                             onClick={ () => this.onSubmitFavorite()}>
                             <i className="fa fa-star" aria-hidden="false"></i>
@@ -152,7 +152,7 @@ class Translate extends Component {
                             onChange={ (e) => this.addNewChange(e)}/>
                     </div>
                     <div>
-                        <button type="submit" 
+                        <button type="button" 
                             className="btn btn-primary"
                             onClick={ (e) => this.onSubmitNewTold(e)}>
                             <i className="fa fa-edit" aria-hidden="false"></i>
@@ -167,7 +167,7 @@ class Translate extends Component {
                 contentLabel="Results">
                 <h3 ref={subtitle => this.subtitle = subtitle}>{this.state.question}</h3>
                 <form>
-                <button onClick={() => this.onSubminNo()}> No </button>
+                <button type="submit" onClick={() => this.onSubminNo()}> No </button>
                 <button onClick={() => this.onSubminYes()}> Yes </button>
                 </form>
             </Modal>

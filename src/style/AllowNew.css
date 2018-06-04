@@ -1,3 +1,13 @@
 .allowBut{
-    margin-left: 5%;
+    position: relative;
+    margin-left: 20%;
+    width: 200px;
+    height: 75px;
+    font-size: 30px;
+    color: white;
+    background-color:#2F4F4F;
+}
+
+.allowLabel{
+    font-size: 20px;
 }

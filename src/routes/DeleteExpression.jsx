@@ -36,43 +36,32 @@ class DeleteExpression extends Component {
                     <TemporaryMessage> Wath do you want to delete?</TemporaryMessage>
                 </div>
                 <div>
-                    <div>
+                    <div className="form-row">
+                    </div>
+                    <div className="form-row">
                         <button type="submit" 
-                            className="btn btn-primary"
+                            className="deletebutton btn-primary"
                             onClick={ (e) => this.deleteUser(e)}>
                             User
                         </button>
                         <button type="submit" 
-                            className="btn btn-primary"
+                            className="deletebutton btn-primary"
                             onClick={ (e) => this.deleteWord(e)}>
                             Word
                         </button>
                         <button type="submit" 
-                            className="btn btn-primary"
+                            className="deletebutton btn-primary"
                             onClick={ (e) => this.deleteTold(e)}>
                             Told
                         </button>
+                    </div>
+                    <div className="form-row">
                         <button type="submit" 
-                            className="btn btn-primary"
+                            className="deletebuttonback btn-primary"
                             onClick={ (e) => this.back(e)}>
                             Back
                         </button>
                     </div>
-                    
-                    {/* <div>
-                        <button type="submit" 
-                            className="btn btn-primary"
-                            onClick={ (e) => this.deleteUser(e)}>
-                            User
-                        </button>
-                    </div>
-                    <div>
-                        <button type="submit" 
-                            className="btn btn-primary"
-                            onClick={ (e) => this.deleteUser(e)}>
-                            User
-                        </button>
-                    </div> */}
                 </div>
             </form>
         )

@@ -20,10 +20,21 @@
 
 }
 
-.btn-danger{
+.gamedanger{
     margin-left: 14%;
     width: 200px;
     height: 75px;
     font-size: 30px;
-    color: black;
+    color: white;
+    background-color: red;
+}
+
+.game{
+    position: relative;
+    margin-left: 18%;
+    width: 200px;
+    height: 75px;
+    font-size: 30px;
+    color: white;
+    background-color:#2F4F4F;
 }

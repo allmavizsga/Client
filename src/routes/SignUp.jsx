@@ -133,7 +133,7 @@ class SignUp extends Component {
                             </div>
                     </div>
                     <div className="div_Button">
-                    <button type="submit" 
+                    <button type="button" 
                             className="btn btn-primary"
                             onClick={ (e) => this.onSubmit(e)}>
                             Sign up

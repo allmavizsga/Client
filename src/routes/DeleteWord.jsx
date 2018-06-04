@@ -35,7 +35,9 @@ class DeleteWord extends Component {
         visibilityy.deleteButtonVisibility = true;
         this.setState({visibilityy});
     }
-
+    delete(){
+        console.log('Delete');
+    }
     render(){
 
         return (
@@ -73,7 +75,7 @@ class DeleteWord extends Component {
                         </button>
                         <button type="submit" 
                             className="deletBut btn-primary"
-                            onClick={ (e) => this.dletete(e)}>
+                            onClick={ () => this.delete()}>
                             <i className="fa fa-trash" aria-hidden="false"></i>
                             Delete
                         </button>

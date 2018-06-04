@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import '../style/AllowNew.css'
 
 
 //  this is just a temporary div. If you don't wanna to use styled components, you can 
@@ -13,17 +14,31 @@ class AllowNewExpression extends Component {
         super(props);
 
         this.state = {
-            requestUser: 'asdasfasfaF',
+            requestUser: 'asdasfasfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\nssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssF',
             requestTold: "poijmadks",
-            userAllow: false,
+            userAllow: true,
             toldAllow: false
         }
+    }
+
+    componentDidMount(){
+        this.newUserRequest();
+        this.newToldRequest();
+      }
+
+    newUserRequest(){
+        console.log("New user request");
+    }
+
+    newToldRequest(){
+        console.log("New told request");
     }
 
     refuseUser(){
         
         if(this.state.userAllow){
             console.log("Visszautasitva user");
+            this.newUserRequest();
         }else{
             console.log("Visszautasitva user HIBA");
         }
@@ -32,6 +47,7 @@ class AllowNewExpression extends Component {
     acceptUser(){
         if(this.state.userAllow){
             console.log("Elfogadva user");
+            this.newUserRequest();
         }else{
             console.log("Elfogadva user HIBA");
         }
@@ -40,6 +56,7 @@ class AllowNewExpression extends Component {
     refuseTold(){
         if(this.state.toldAllow){
             console.log("Visszautasitva told");
+            this.newToldRequest();
         }else{
             console.log("Visszautasitva told HIBA");
         }
@@ -47,7 +64,8 @@ class AllowNewExpression extends Component {
 
     acceptTold(){
         if(this.state.toldAllow){
-            console.log("Elfogadva tld")
+            console.log("Elfogadva tld");
+            this.newToldRequest();
         }else{
             console.log("Elfogadva tld HIBA")
         }
@@ -60,38 +78,42 @@ class AllowNewExpression extends Component {
                 <div className="form-row">
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md-8">
+                    <div className="form-group col-md-4">
                         <label className="allowLabel">Sign up user:</label>
                         <div>
-                            <label>{this.state.requestUser}</label>
+                            <label >{this.state.requestUser}</label>
                         </div>
                     </div>
-                    <button type="submit" 
+                    </div>
+                <div className="form-row">
+                    <button type="button" 
                         className="allowBut btn-primary"
                         onClick={ () => this.acceptUser()}>
                         Accept
                     </button>
-                    <button type="submit" 
+                    <button type="button" 
                         className="allowBut btn-primary"
                         onClick={ () => this.refuseUser()}>
                         Refuse
-                    </button>   
+                    </button> 
                 </div> 
                 <div className="form-row">
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md-8">
+                    <div className="form-group col-md-4">
                         <label className="allowLabel">Told proposal:</label>
                         <div>
                             <label>{this.state.requestTold}</label>
                         </div>
                     </div>
-                    <button type="submit" 
+                </div>
+                <div className="form-row">
+                    <button type="button" 
                         className="allowBut btn-primary"
                         onClick={ () => this.acceptTold()}>
                         Accept
                     </button>
-                    <button type="submit" 
+                    <button type="button" 
                         className="allowBut btn-primary"
                         onClick={ () => this.refuseTold()}>
                         Refuse

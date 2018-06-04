@@ -33,7 +33,7 @@ class DeleteUser extends Component {
         console.log(userEm)
     }
 
-    search(e){
+    search(){
         console.log('Seaching');
         const visibilityy = this.state;
         visibilityy.deleteButtonVisibility = true;
@@ -55,6 +55,7 @@ class DeleteUser extends Component {
             )
         })
         return (
+            <form>
             <div>
                 <div className="form-row ">
                 </div>
@@ -84,12 +85,12 @@ class DeleteUser extends Component {
                 <div>
                     <button type="submit" 
                         className="deletBut btn-primary"
-                        onClick={ (e) => this.search(e)}>
+                        onClick={ () => this.search()}>
                         Search
                     </button>
                     <button type="submit" 
                         className="deletBut btn-primary"
-                        onClick={ (e) => this.delete(e)}>
+                        onClick={ () => this.delete()}>
                         <i className="fa fa-trash" aria-hidden="false"></i>
                         Delete
                     </button>
@@ -101,6 +102,7 @@ class DeleteUser extends Component {
                 </div>
                 
             </div>
+            </form>
         )
     }
 }

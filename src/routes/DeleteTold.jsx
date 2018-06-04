@@ -36,6 +36,10 @@ class DeleteTold extends Component {
         this.setState({visibilityy});
     }
 
+    delete(){
+        console.log('Delete');
+    }
+
     render(){
 
         return (
@@ -71,9 +75,9 @@ class DeleteTold extends Component {
                         onClick={ (e) => this.search(e)}>
                         Search
                     </button>
-                    <button type="submit" 
+                    <button type="submit"   
                         className="deletBut btn-primary"
-                        onClick={ (e) => this.dletete(e)}>
+                        onClick={ () => this.delete()}>
                         <i className="fa fa-trash" aria-hidden="false"></i>
                         Delete
                     </button>
