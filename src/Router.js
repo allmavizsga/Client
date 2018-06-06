@@ -7,6 +7,7 @@ import SignInGuest from './routes/SignInGuest';
 import SignUp from './routes/SignUp';
 import SignOut from './routes/SignOut';
 import Translate from './routes/Translate';
+import Favorite from './routes/Favorite';
 import Game from './routes/Game';
 import DeleteExpression from './routes/DeleteExpression';
 import DeleteUser from './routes/DeleteUser';
@@ -31,6 +32,7 @@ class Router extends Component {
                     <Route exact path="/delete_expression/word" render={ (props) => <DeleteWord {...props}/>} />
                     <Route exact path="/delete_expression/told" render={ (props) => <DeleteTold {...props}/>} />
                     <Route exact path="/translate" render={ (props) => <Translate {...props}/>} />
+                    <Route exact path="/favorite" render={ (props) => <Favorite {...props}/>} />
                     <Route exact path="/game" render={ (props) => <Game {...props}/>} />
                     <Route render={ (props) => <PageNotFound {...props}/>} />
                 </Switch>

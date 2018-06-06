@@ -14,8 +14,8 @@ class AllowNewExpression extends Component {
         super(props);
 
         this.state = {
-            requestUser: 'asdasfasfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\nssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssF',
-            requestTold: "poijmadks",
+            requestUser: 'st_arpi@yahoo.com, 20 Eroilor, 21, A2, 2 Kolozsvár, Romania',
+            requestTold: "The pig eat.",
             userAllow: true,
             toldAllow: false
         }
@@ -78,7 +78,7 @@ class AllowNewExpression extends Component {
                 <div className="form-row">
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-6">
                         <label className="allowLabel">Sign up user:</label>
                         <div>
                             <label >{this.state.requestUser}</label>
@@ -100,7 +100,7 @@ class AllowNewExpression extends Component {
                 <div className="form-row">
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-6">
                         <label className="allowLabel">Told proposal:</label>
                         <div>
                             <label>{this.state.requestTold}</label>

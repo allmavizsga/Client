@@ -193,6 +193,8 @@ const NavigationBar = (props) => {
                     </MenuItemHome>
                     <Content>
                         <MenuItem href="/game"> Game </MenuItem>
+                        <MenuItem href="/favorite"> Favorite </MenuItem>
+                        <MenuItem href="/translate"> Translate </MenuItem>
                         <MenuItem href="/sign_out"> Sign Out </MenuItem>
                         <MenuItem>
                             <DropDown>
@@ -209,7 +211,7 @@ const NavigationBar = (props) => {
                                 <DropDownContent>
                                     <DropDownItem href="/new_expression">  Allow new   </DropDownItem>
                                     <DropDownItem href="/delete_expression">  Delete  </DropDownItem>
-                                    <DropDownItem href="/idk"> I don't know </DropDownItem>
+                                    {/* <DropDownItem href="/idk"> I don't know </DropDownItem> */}
                                 </DropDownContent>
                             </DropDown>
                         </MenuItem>

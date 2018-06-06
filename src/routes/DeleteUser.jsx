@@ -9,12 +9,12 @@ class DeleteUser extends Component {
         super(props);
         this.state = {
             userEmail: '',
-            temp: [{email: 'asdjlfjasljas@sjkfsf.asd',
+            temp: [{email: 'st_arpi@yahoo.com',
                 password: 'sfasfafafsa',
-                address1: 'sfasfasdasddasasdn',
-                address2: 'asdasdasdasdasdt',
-                city: 'aasdasdasdasda',
-                state: 'sdadasdsd   '}],
+                address1: '20 Eroilor',
+                address2: '21, A2, 2',
+                city: 'Kolozsvár',
+                state: 'Romania'}],
             deleteButtonVisibility: false
             
         }

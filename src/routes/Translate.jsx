@@ -19,12 +19,12 @@ class Translate extends Component {
         super(props);
         this.state = {
             word: '',
-            translated: 'asdsadasdasdsdfsdsd',
+            translated: 'write',
             told: '',
-            tolds: '123\nasdads',
+            tolds: 'I write a book.',
             modalIsOpen: false,
             favoriteButton: true,
-            favorite: false,
+            favorite: true,
             quastion: ''
         }
     }
@@ -165,7 +165,7 @@ class Translate extends Component {
                 isOpen={this.state.modalIsOpen}
                 style={customStyles}
                 contentLabel="Results">
-                <h3 ref={subtitle => this.subtitle = subtitle}>{this.state.question}</h3>
+                <h3 ref={subtitle => this.subtitle = subtitle}>{this.state.quastion}</h3>
                 <form>
                 <button type="submit" onClick={() => this.onSubminNo()}> No </button>
                 <button onClick={() => this.onSubminYes()}> Yes </button>

@@ -9,7 +9,7 @@ class DeleteTold extends Component {
         super(props);
         this.state = {
             toldIn: '',
-            toldOut: 'asds',
+            toldOut: 'The pig eat.',
             deleteButtonVisibility: false
 
         }

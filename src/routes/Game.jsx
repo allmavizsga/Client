@@ -20,12 +20,13 @@ class Game extends Component {
     constructor(props){
         super(props);
         this.state = {
-            temp: [ {english: 'how are you', hungarian: 'hogy vagy', result:'Good'},{english: 'how are you', hungarian: 'hogy vagy', result:'Good'} ],
-            color: ['#FF0000',"#00FF00"],
+            temp: [ {english: 'én', hungarian: '', result:''},{english: 'te', hungarian: '', result:''},{english: 'ő', hungarian: '', result:''},{english: 'mi', hungarian: '', result:''},{english: 'ti', hungarian: '', result:''},{english: 'ők', hungarian: '', result:''} ],
+            color: ['#FFFFFF',"#FFFFFF","#FFFFFF","#FFFFFF","#FFFFFF","#FFFFFF"],
             hungarianExp: [],
             modalIsOpen: false,
-            results: '18/20 ',
-            resultVisibil: ''
+            results: '18/20 It is grate!',
+            resultVisibil: '',
+            modalFavorite: false
         }
     }
 
@@ -75,6 +76,7 @@ class Game extends Component {
 
 
     render(){
+        /*setTimeout(() =>{},1000) */
         const expressions = this.state.temp.map((current, index) => {
             return (
                 <tr>
@@ -130,6 +132,16 @@ class Game extends Component {
                             <form>
                             <button onClick={() => this.closeModal()}> Close </button>
                             <button onClick={() => this.back()}> End game </button>
+                            </form>
+                        </Modal>
+                        <Modal
+                            isOpen={this.state.modalFavorite}
+                            //onAfterOpen={this.afterOpenModal()}
+                            style={customStyles}
+                            contentLabel="Error">
+                            <h3 ref={subtitle => this.subtitle = subtitle}>You dont have favorite!</h3>
+                            <form>
+                            <button onClick={() => this.back()}> Oke </button>
                             </form>
                         </Modal>
                         <a href={`/game`}
