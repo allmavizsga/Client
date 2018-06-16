@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import axios from 'axios'
 import Modal from 'react-modal';
 
 const customStyles = {
@@ -17,20 +18,38 @@ class Favorite extends Component {
     constructor(props){
         super(props);
         this.state = {
-            temp: [ {english: 'én', hungarian: 'I'},{english: 'te', hungarian: 'you'},{english: 'ő', hungarian: 'he'},{english: 'mi', hungarian: 'we'},{english: 'ti', hungarian: 'you'},{english: 'ők', hungarian: 'they'} ],
-            modalIsOpen: false
+            dictionary:[],
+            modalIsOpen: false,
+            userEmail: 'pszfoci@citromail.hu'
         }
     }
 
     componentDidMount(){
-        this.donthavefavorite();
+        this.loadFavorites();
       }
+    
+    loadFavorites(){
+        const url = `http://localhost:8080/favorite/`+this.state.userEmail;  
+        axios.get(url)
+            .then(res => {
+            console.log(res.data);
+            if(res.data[0] !=null){
+                console.log("Bele");
+                const temp = this.state;
+                temp.dictionary = res.data.map( obj => obj.word);
+                this.setState(temp);
+                console.log(temp);
+                
+            } else{
+                console.log("Nem");
+                this.donthavefavorite();
+            }
+      })
+    }
 
     donthavefavorite(){
         const temp = this.state;
-        if( temp.temp.english ===''){ 
-            temp.modalIsOpen = true;
-        }
+        temp.modalIsOpen = true;
         this.setState(temp);
     }
 
@@ -39,7 +58,7 @@ class Favorite extends Component {
     }
 
     render(){
-        const expressions = this.state.temp.map((current, index) => {
+        const expressions = this.state.dictionary.map((current, index) => {
             return (
                 <tr>
                     <th className="rowsGame" scope="row">{index+1}</th>

@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import swal from 'sweetalert2-react';
+import axios from 'axios'
 import Modal from 'react-modal';
 import '../style/Game.css'
 
@@ -20,20 +20,59 @@ class Game extends Component {
     constructor(props){
         super(props);
         this.state = {
-            temp: [ {english: 'én', hungarian: '', result:''},{english: 'te', hungarian: '', result:''},{english: 'ő', hungarian: '', result:''},{english: 'mi', hungarian: '', result:''},{english: 'ti', hungarian: '', result:''},{english: 'ők', hungarian: '', result:''} ],
-            color: ['#FFFFFF',"#FFFFFF","#FFFFFF","#FFFFFF","#FFFFFF","#FFFFFF"],
+            dictionary: [],
+            color: [],
             hungarianExp: [],
             modalIsOpen: false,
-            results: '18/20 It is grate!',
+            result: [],
+            numberOfFavoriteInGame: '2',
             resultVisibil: '',
-            modalFavorite: false
+            modalFavorite: false,
+            userEmail: 'dezsotokos@yahoo.com'
         }
     }
 
+    componentDidMount(){
+        this.loadGame();
+      }
+
+    loadGame(){
+        const url = `http://localhost:8080/favorite/game/`+this.state.userEmail+'/'+this.state.numberOfFavoriteInGame;  
+        axios.get(url)
+            .then(res => {
+            console.log(res.data);
+            if(res.data[0] !=null){
+                console.log("Bele");
+                const temp = this.state;
+                temp.results = 0;
+                temp.dictionary = res.data.map( obj => obj.word);
+                this.setState(temp);
+                console.log(temp);
+                
+            } else{
+                console.log("Nem");
+                const temp = Object.assign(this.state,{modalFavorite:true});
+                this.setState(temp);
+            }
+      })
+    }
+
     send(e){
-        console.log("The next word button was clicked!");
-        const temp = this.state.temp;
-        temp.hungarian = this.state.hungarianExp;
+        console.log(this.state);
+
+        const temp = this.state;
+        temp.color = temp.dictionary.map( (object, index) => {
+            console.log(object.hungarian+' '+this.state.hungarianExp[index]+' '+index);
+            if(object.hungarian === this.state.hungarianExp[index]){
+                temp.results = temp.results +1;
+                temp.result[index] = "It is good";
+                return '#00FF00'
+            } else {
+                temp.result[index] = object.hungarian;
+                return '#FF0000'
+            }
+        })
+        temp.results = temp.results+' in '+temp.numberOfFavoriteInGame;
         temp.resultVisibil = "Result";
         temp.modalIsOpen = true;
         this.setState(temp);
@@ -43,7 +82,7 @@ class Game extends Component {
     }
 
     onChangeSolution(event, index){
-        console.log('index: ', index)
+        console.log('index: ', index);
         const temp = this.state.hungarianExp;
         temp[index] = event.target.value;
         this.setState({hungarianExp: temp});
@@ -64,9 +103,14 @@ class Game extends Component {
     newGame() {
         const temp = this.state;
         temp.hungarianExp = [];
-        temp.temp.english = [];
-        temp.temp.result = [];
+        temp.dictionary = [];
+        temp.result = [];
+        temp.hungarianExp = [];
+        temp.color = [];
+        temp.resultVisibil = '';
+        temp.results = 0;
         this.setState(temp);
+        this.loadGame();
         
     }
 
@@ -77,7 +121,7 @@ class Game extends Component {
 
     render(){
         /*setTimeout(() =>{},1000) */
-        const expressions = this.state.temp.map((current, index) => {
+        const expressions = this.state.dictionary.map((current, index) => {
             return (
                 <tr>
                     <th className="rowsGame" scope="row">{index+1}</th>
@@ -96,7 +140,7 @@ class Game extends Component {
                         align="center"  
                         visibility="hidden"
                         bgcolor = {this.state.color[index]}>
-                        {current.result}
+                        {this.state.result[index]}
                     </td>
                 </tr>
                 

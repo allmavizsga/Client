@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 import '../style/SignIn.css'
+import axios from 'axios'
+import Modal from 'react-modal';
+
+const customStyles = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)'
+    }
+  };
 
 
 
@@ -10,7 +23,8 @@ class SignInGuest extends Component {
         super(props);
 
         this.state = {
-            guestname: ''
+            guestname: '',
+            modalIsOpen: false
         }
     }
 
@@ -23,8 +37,24 @@ class SignInGuest extends Component {
     }
 
     onSubmit(e){
-        console.log("The submit button was clicked!");   
+        console.log("The submit button was clicked!");
+        const url = `http://localhost:8080/guest/`+this.state.guestname;  
+        axios.post(url)
+            .then(res => {
+            console.log(res.data);
+            if(res.data.email != null){
+                this.props.history.push("/translate");
+            } else{
+                const temp = Object.assign(this.state,{modalIsOpen:true});
+                this.setState(temp);
+            }
+      })
         
+    }
+
+    closeModal(){
+        const temp = Object.assign(this.state,{modalIsOpen:false});
+            this.setState(temp);
     }
 
     render(){
@@ -39,8 +69,8 @@ class SignInGuest extends Component {
                                className="form-control"  
                                id="inputname" 
                                placeholder="Name"
-                               value={this.state.username}
-                               onChange={ (e) => this.fieldChange('username',e)}/>
+                               value={this.state.guestname}
+                               onChange={ (e) => this.fieldChange('guestname',e)}/>
                     </div>
                 </div>
                 <div className="form-rowIn">
@@ -54,6 +84,16 @@ class SignInGuest extends Component {
                         </button>
                     </div>
                 </div>
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    //onAfterOpen={this.afterOpenModal()}
+                    style={customStyles}
+                    contentLabel="Error">
+                    <h3 ref={subtitle => this.subtitle = subtitle}>Incorrect sign in! Try it again!</h3>
+                    <form>
+                    <button onClick={() => this.closeModal()}> Oke </button>
+                    </form>
+                </Modal>
             </form>
         )
     }

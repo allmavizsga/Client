@@ -118,7 +118,7 @@ const Nav = styled.div `
 `;
 
 
-const DropDownItem = styled.a `
+const DropDownItem = styled.div `
     background: #2F4F4F;
     float: none;
     color: white;

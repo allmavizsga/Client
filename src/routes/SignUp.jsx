@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import '../style/SignUp.css'
+import axios from 'axios'
 
 const label = styled.div`
     background-color:lightblue;
@@ -20,8 +21,7 @@ class SignUp extends Component {
             address1: '',
             address2: '',
             city: '',
-            state: '',
-            zip: '',
+            state: 'Romania',
             checkmeout: false
         }
     }
@@ -43,7 +43,20 @@ class SignUp extends Component {
     }
 
     onSubmit(e){
-        console.log("The submit button was clicked!");   
+        console.log("The submit button was clicked!"); 
+        // const temp= [{
+        //     allowUserEmail: this.state.email,
+        //     allowUserpassword: this.state.password,
+        //     allowUserAddress: this.state.address1+ ', ' + this.state.address2,
+        //     allowUserTown: this.state.city,
+        //     allowUserState: this.state.state,
+        //     allowUserAdmin: this.state.checkmeout
+        // }]
+        const url = `http://localhost:8080/allowuser/new/`+this.state.email+'/'+this.state.password+'/'+this.state.address1+', '+this.state.address2+'/'+this.state.city+'/'+this.state.state+'/'+this.state.checkmeout;  
+        axios.post(url)
+            .then(res => {
+            console.log(res.data)
+      })
     }
 
     render(){

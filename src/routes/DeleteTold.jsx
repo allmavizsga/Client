@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import axios from 'axios'
 
 
 
@@ -8,8 +9,9 @@ class DeleteTold extends Component {
 
         super(props);
         this.state = {
+            toldId: '',
             toldIn: '',
-            toldOut: 'The pig eat.',
+            toldOut: '',
             deleteButtonVisibility: false
 
         }
@@ -20,24 +22,50 @@ class DeleteTold extends Component {
         this.props.history.push("/delete_expression");
     }
 
-    fieldChange(event){
-        const told = this.state;
+    fieldChange(field,event){
+        const newState = Object.assign(this.state, {
+            [field]: event.target.value, deleteButtonVisibility: false
+        });
         
-        told.toldIn = event.target.value;
-        told.deleteButtonVisibility = false;
-        this.setState(told);
-        console.log(told)
+        this.setState(newState);
+        console.log(newState)
     }
 
     search(e){
         console.log('Seaching');
-        const visibilityy = this.state;
-        visibilityy.deleteButtonVisibility = true;
-        this.setState({visibilityy});
+        const url = `http://localhost:8080/told/ptold`;
+        axios.post(url,this.state.toldIn)
+            .then(res => {
+                console.log(res.data);
+                if(res.data.told != null) {
+                    const temp = this.state;
+                    temp.toldId = res.data.toldId;
+                    temp.toldOut = res.data.told;
+                    temp.deleteButtonVisibility = true;
+                    this.setState(temp);
+                    console.log(temp);
+                }else{
+                    const temp = this.state;
+                    temp.toldOut = 'This told do not exist!';
+                    temp.deleteButtonVisibility = false;
+                    this.setState(temp);
+                }
+
+            })
     }
 
     delete(){
-        console.log('Delete');
+        if(this.state.deleteButtonVisibility){
+            const url = `http://localhost:8080/told/`+this.state.toldId;
+            axios.delete(url)
+                .then(res => {
+                    const temp = this.state;
+                    temp.deleteButtonVisibility = false;
+                    temp.toldOut = '';
+                    temp.toldIn = '';
+                    this.setState(temp);
+                })
+        }
     }
 
     render(){
@@ -48,13 +76,13 @@ class DeleteTold extends Component {
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-4">
-                        <label className="delLabHeader">Search by told: </label>
-                        <input type="email" 
+                        <label className="delLabHeader">Search told: </label>
+                        <input type="text" 
                             className="form-control"  
                             id="inputEmail4" 
                             placeholder="Told"
                             value={this.state.toldIn}
-                            onChange={ (e) => this.fieldChange(e)}/> 
+                            onChange={ (e) => this.fieldChange('toldIn',e)}/> 
                     </div>
                     <div className="form-group col-md-8">
                         <div>

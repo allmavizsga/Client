@@ -1,7 +1,5 @@
 import React , { Component } from 'react';
-import SweetAlert from 'sweetalert-react';
 import styled from 'styled-components';
-
 
 
 //  this is just a temporary div. If you don't wanna to use styled components, you can 
@@ -17,12 +15,10 @@ const TemporaryMessage = styled.div `
 
 class Home extends Component {
 
-  
-  
     render() {
       return (
         <div>
-          
+          <TemporaryMessage> Wlcome in our page!</TemporaryMessage>
         </div>
       );
     }

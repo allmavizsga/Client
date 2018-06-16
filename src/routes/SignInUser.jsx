@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 import '../style/SignIn.css'
+import axios from 'axios'
+import Modal from 'react-modal';
+
+const customStyles = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)'
+    }
+  };
 
 
 class SignInUser extends Component {
@@ -9,7 +22,8 @@ class SignInUser extends Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            modalIsOpen: false
         }
     }
 
@@ -23,7 +37,23 @@ class SignInUser extends Component {
 
     onSubmit(e){
         console.log("The submit button was clicked!");   
-        
+        const url = `http://localhost:8080/users/`+this.state.email+'/'+this.state.password;  
+        axios.get(url)
+            .then(res => {
+            console.log(res.data);
+            if(res.data.email != null){
+                this.props.history.push("/translate");
+            } else{
+                const temp = Object.assign(this.state,{modalIsOpen:true});
+                this.setState(temp);
+            }
+      })
+    }
+
+    closeModal(){
+        const temp = Object.assign(this.state,{modalIsOpen:false});
+        this.setState(temp);
+
     }
 
     render(){
@@ -57,13 +87,23 @@ class SignInUser extends Component {
                 </div>
                 <div className="form-rowIn">
                     <div>
-                        <button type="submit" 
+                        <button type="button" 
                             className="signinguest btn-primary"
                             onClick={ (e) => this.onSubmit(e)}>
                             Sign in
                         </button>
                     </div>
                 </div>
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    //onAfterOpen={this.afterOpenModal()}
+                    style={customStyles}
+                    contentLabel="Error">
+                    <h3 ref={subtitle => this.subtitle = subtitle}>Email or password is incorrect!</h3>
+                    <form>
+                    <button onClick={() => this.closeModal()}> Oke </button>
+                    </form>
+                </Modal>
             </form>
         )
     }

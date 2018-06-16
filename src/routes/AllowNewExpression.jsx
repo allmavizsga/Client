@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import axios from  'axios'
 import '../style/AllowNew.css'
 
 
@@ -14,9 +15,22 @@ class AllowNewExpression extends Component {
         super(props);
 
         this.state = {
-            requestUser: 'st_arpi@yahoo.com, 20 Eroilor, 21, A2, 2 Kolozsvár, Romania',
-            requestTold: "The pig eat.",
-            userAllow: true,
+            requestUser: [{
+                email: '',
+                password: '',
+                address: '',
+                city: '',
+                town:'',
+                admin: false}
+            ],
+            requestTold:[{
+                toldId: '',
+                told: '',
+                wordId:'',
+                useremail: ''}
+            ],
+            user:'',
+            userAllow: false,
             toldAllow: false
         }
     }
@@ -27,18 +41,53 @@ class AllowNewExpression extends Component {
       }
 
     newUserRequest(){
-        console.log("New user request");
+        axios.get(`http://localhost:8080/allowuser/first`)
+        .then(res => {
+            const temp = this.state;
+            console.log(res.data);
+            if(res.data.email != null){
+                console.log(res.data);
+                temp.userAllow = true;
+                temp.requestUser.email = res.data.email;
+                temp.user = res.data.email + " " + res.data.address + " " + res.data.town + " " + res.data.state;
+
+            }else{
+                temp.user = "Don't have any request!";
+                temp.userAllow = false;
+            }
+            this.setState(temp);
+        })
+    
     }
 
     newToldRequest(){
         console.log("New told request");
+        axios.get(`http://localhost:8080/allowtold/first`)
+        .then(res => {
+            console.log(res.data);
+            console.log("uj mondat");           
+            const temp = this.state;
+            if(res.data.allowToldId != null){
+                temp.toldAllow = true;
+                temp.requestTold.toldId = res.data.allowToldId;
+                temp.requestTold.told = res.data.allowTold;
+            }else{
+                temp.requestTold.told = "Don't have any request";
+                temp.toldAllow = false;
+            }
+            this.setState(temp);
+      })
     }
 
     refuseUser(){
         
         if(this.state.userAllow){
-            console.log("Visszautasitva user");
-            this.newUserRequest();
+            const url = `http://localhost:8080/allowuser/`+this.state.requestUser.email;
+            axios.delete(url)
+                .then(res => { 
+                    this.newUserRequest();
+                })
+            
         }else{
             console.log("Visszautasitva user HIBA");
         }
@@ -46,28 +95,38 @@ class AllowNewExpression extends Component {
 
     acceptUser(){
         if(this.state.userAllow){
-            console.log("Elfogadva user");
-            this.newUserRequest();
+            const url = `http://localhost:8080/allowuser/`+this.state.requestUser.email;
+            axios.post(url)
+                .then(res => { 
+                    console.log(res.data);
+                    this.newUserRequest();
+                })
         }else{
-            console.log("Elfogadva user HIBA");
+            console.log("Elfogadasi user HIBA");
         }
     }
 
     refuseTold(){
         if(this.state.toldAllow){
-            console.log("Visszautasitva told");
-            this.newToldRequest();
+            const url = `http://localhost:8080/allowtold/`+this.state.requestTold.toldId;
+            axios.delete(url)
+                .then(res => { 
+                    this.newToldRequest();
+                })
         }else{
-            console.log("Visszautasitva told HIBA");
+            console.log("Visszautasitva user HIBA");
         }
     }
 
     acceptTold(){
         if(this.state.toldAllow){
-            console.log("Elfogadva tld");
-            this.newToldRequest();
+            const url = `http://localhost:8080/allowtold/`+this.state.requestTold.toldId;
+            axios.post(url)
+                .then(res => { 
+                    this.newToldRequest();
+                })
         }else{
-            console.log("Elfogadva tld HIBA")
+            console.log("Elfogadasi user HIBA");
         }
     }
 
@@ -81,7 +140,7 @@ class AllowNewExpression extends Component {
                     <div className="form-group col-md-6">
                         <label className="allowLabel">Sign up user:</label>
                         <div>
-                            <label >{this.state.requestUser}</label>
+                            <label >{this.state.user}</label>
                         </div>
                     </div>
                     </div>
@@ -103,7 +162,7 @@ class AllowNewExpression extends Component {
                     <div className="form-group col-md-6">
                         <label className="allowLabel">Told proposal:</label>
                         <div>
-                            <label>{this.state.requestTold}</label>
+                            <label>{this.state.requestTold.told}</label>
                         </div>
                     </div>
                 </div>

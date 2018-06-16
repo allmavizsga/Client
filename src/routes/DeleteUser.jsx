@@ -1,5 +1,6 @@
 import React , { Component } from 'react';
 import '../style/Delete.css'
+import axios from 'axios'
 
 
 class DeleteUser extends Component {
@@ -9,13 +10,9 @@ class DeleteUser extends Component {
         super(props);
         this.state = {
             userEmail: '',
-            temp: [{email: 'st_arpi@yahoo.com',
-                password: 'sfasfafafsa',
-                address1: '20 Eroilor',
-                address2: '21, A2, 2',
-                city: 'Kolozsvár',
-                state: 'Romania'}],
-            deleteButtonVisibility: false
+            text: '',
+            deleteButtonVisibility: false,
+            respons: false
             
         }
 
@@ -28,6 +25,7 @@ class DeleteUser extends Component {
     fieldChange(event){
         const userEm = this.state;
         userEm.userEmail = event.target.value;
+        userEm.text= '';
         userEm.deleteButtonVisibility = false;
         this.setState(userEm);
         console.log(userEm)
@@ -35,25 +33,46 @@ class DeleteUser extends Component {
 
     search(){
         console.log('Seaching');
-        const visibilityy = this.state;
-        visibilityy.deleteButtonVisibility = true;
-        this.setState(visibilityy);
-        console.log(visibilityy);
+        const url = `http://localhost:8080/users/`+this.state.userEmail;
+        axios.get(url)
+            .then(res => {
+                console.log(res.data);
+                if(res.data.email != null) {
+                    const temp = this.state;
+                    temp.text = 'Email: '+res.data.email+' Address: '+res.data.address+', '+res.data.town;+', '+res.data.state;
+                    temp.respons = true,
+                    temp.deleteButtonVisibility = true;
+                    this.setState(temp);
+                    console.log(temp);
+                }else{
+                    const temp = this.state;
+                    temp.text = 'This user do not exist!';
+                    temp.respons = false;
+                    temp.deleteButtonVisibility = false;
+                    this.setState(temp);
+                }
+
+            })
     }
 
     delete(){
         console.log("Delete user");
+        if(this.state.deleteButtonVisibility){
+            const url = `http://localhost:8080/users/`+this.state.userEmail;
+            axios.delete(url)
+                .then(res => {
+                    const temp = this.state;
+                    temp.deleteButtonVisibility = false;
+                    temp.userEmail = '';
+                    temp.text = '';
+                    this.setState(temp);
+                })
+        }
     }
 
 
 
     render(){
-        const expressions = this.state.temp.map((current) => {
-            return (
-                <label>Email: {current.email}, Address: {current.address1}, {current.address2}, {current.city}</label>
-                
-            )
-        })
         return (
             <form>
             <div>
@@ -76,19 +95,19 @@ class DeleteUser extends Component {
                             </label>
                         </div>
                         <div>
-                            {expressions}
+                            <label>{this.state.text}</label>
                         </div>
                     </div>
                 </div>
                 <div className="form-row ">
                 </div>
                 <div>
-                    <button type="submit" 
+                    <button type="button" 
                         className="deletBut btn-primary"
                         onClick={ () => this.search()}>
                         Search
                     </button>
-                    <button type="submit" 
+                    <button type="button" 
                         className="deletBut btn-primary"
                         onClick={ () => this.delete()}>
                         <i className="fa fa-trash" aria-hidden="false"></i>
