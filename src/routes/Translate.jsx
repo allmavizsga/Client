@@ -21,13 +21,13 @@ class Translate extends Component {
         this.state = {
             word: 'szia',
             translated: 'hello',
-            wordId: '',
+            wordId: 1,
             told: '',
             tolds: [],
             userEmail: 'dezsotokos@yahoo.com',
             modalIsOpen: false,
             favoriteButton: true,
-            favorite: true,
+            favorite: false,
             quastion: ''
         }
     }
@@ -103,8 +103,10 @@ class Translate extends Component {
     favorite(){
         axios.get(`http://localhost:8080/favorite/`+this.state.userEmail+'/'+this.state.wordId)
             .then(res => {
-                if(res.data !=null){
+                if(res.data !=""){
+                    console.log("Kedvenc1  ");
                     console.log(res.data);
+                    console.log("Kedvenc   ");
                     const temp = this.state;
                     temp.favorite = true;
                     this.setState(temp);
@@ -115,10 +117,18 @@ class Translate extends Component {
 
     onSubmitNewTold(e){
         if(this.state.told != ''){
-            axios.get(`http://localhost:8080/told/newtold`,this.state.told,+this.state.wordId)
+            console.log(this.state);
+            const temp ={
+                told: this.state.told,
+                wordId: this.state.wordId,
+                email: this.state.userEmail
+            }
+            axios.post(`http://localhost:8080/allowtold/newallowtold`,temp)
                 .then(res => {
                     if(res.data !=null){
                         console.log("Beszurva a szo");
+                        const nulltold = Object.assign(this.state, {["told"]: ""});
+                        this.setState(nulltold);
                     }
                         
             })
@@ -152,7 +162,7 @@ class Translate extends Component {
             temp.favorite = true;
             console.log("Add to favorite");
             const url = `http://localhost:8080/favorite/`+this.state.userEmail+'/'+this.state.wordId;  
-            axios.get(url)
+            axios.post(url)
                 .then(res => {})
         }
         this.setState(temp);

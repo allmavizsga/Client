@@ -3,11 +3,6 @@ import axios from  'axios'
 import '../style/AllowNew.css'
 
 
-//  this is just a temporary div. If you don't wanna to use styled components, you can 
-//  adjust your own components with explicit css files, using the 'className' attribute of the tags.
-//  In this case u should can the import in the second row
-
-
 
 class AllowNewExpression extends Component {
  
@@ -61,22 +56,25 @@ class AllowNewExpression extends Component {
     }
 
     newToldRequest(){
-        console.log("New told request");
         axios.get(`http://localhost:8080/allowtold/first`)
-        .then(res => {
-            console.log(res.data);
-            console.log("uj mondat");           
+        .then(res => {       
             const temp = this.state;
             if(res.data.allowToldId != null){
                 temp.toldAllow = true;
                 temp.requestTold.toldId = res.data.allowToldId;
                 temp.requestTold.told = res.data.allowTold;
             }else{
-                temp.requestTold.told = "Don't have any request";
+                temp.requestTold.told = "Don't have any request!";
                 temp.toldAllow = false;
             }
             this.setState(temp);
       })
+      if(this.state.toldAllow == false){
+          const temp = this.state;
+          temp.requestTold.told= "Don't have any request!";
+          this.setState(temp);
+      }
+
     }
 
     refuseUser(){
@@ -117,7 +115,7 @@ class AllowNewExpression extends Component {
             console.log("Visszautasitva user HIBA");
         }
     }
-
+    
     acceptTold(){
         if(this.state.toldAllow){
             const url = `http://localhost:8080/allowtold/`+this.state.requestTold.toldId;

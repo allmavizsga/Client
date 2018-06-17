@@ -43,6 +43,11 @@ class SignInUser extends Component {
             console.log(res.data);
             if(res.data.email != null){
                 this.props.history.push("/translate");
+                if (res.data.admin){
+                    if (localStorage.getItem('user') !== ""){
+                        localStorage.setItem('user', res.data)
+                    }
+                }
             } else{
                 const temp = Object.assign(this.state,{modalIsOpen:true});
                 this.setState(temp);

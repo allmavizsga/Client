@@ -16,6 +16,7 @@ const TemporaryMessage = styled.div `
 class Home extends Component {
 
     render() {
+      //itt is ellenorzes, hogy valoban jo user-e a localstorage segitsegeve
       return (
         <div>
           <TemporaryMessage> Wlcome in our page!</TemporaryMessage>

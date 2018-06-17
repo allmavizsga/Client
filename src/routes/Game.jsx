@@ -25,7 +25,9 @@ class Game extends Component {
             hungarianExp: [],
             modalIsOpen: false,
             result: [],
-            numberOfFavoriteInGame: '2',
+            results: 0,
+            question: 0,
+            numberOfFavoriteInGame: 2,
             resultVisibil: '',
             modalFavorite: false,
             userEmail: 'dezsotokos@yahoo.com'
@@ -45,6 +47,7 @@ class Game extends Component {
                 console.log("Bele");
                 const temp = this.state;
                 temp.results = 0;
+                temp.question = 0;
                 temp.dictionary = res.data.map( obj => obj.word);
                 this.setState(temp);
                 console.log(temp);
@@ -71,8 +74,9 @@ class Game extends Component {
                 temp.result[index] = object.hungarian;
                 return '#FF0000'
             }
+            temp.question = temp.question +1;
         })
-        temp.results = temp.results+' in '+temp.numberOfFavoriteInGame;
+        temp.results = temp.results+' in '+temp.question;
         temp.resultVisibil = "Result";
         temp.modalIsOpen = true;
         this.setState(temp);

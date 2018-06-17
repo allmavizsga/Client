@@ -44,16 +44,17 @@ class SignUp extends Component {
 
     onSubmit(e){
         console.log("The submit button was clicked!"); 
-        // const temp= [{
-        //     allowUserEmail: this.state.email,
-        //     allowUserpassword: this.state.password,
-        //     allowUserAddress: this.state.address1+ ', ' + this.state.address2,
-        //     allowUserTown: this.state.city,
-        //     allowUserState: this.state.state,
-        //     allowUserAdmin: this.state.checkmeout
-        // }]
-        const url = `http://localhost:8080/allowuser/new/`+this.state.email+'/'+this.state.password+'/'+this.state.address1+', '+this.state.address2+'/'+this.state.city+'/'+this.state.state+'/'+this.state.checkmeout;  
-        axios.post(url)
+        const temp= {
+            allowUserEmail: this.state.email,
+            allowUserpassword: this.state.password,
+            allowUserAddress: this.state.address1+ ', ' + this.state.address2,
+            allowUserTown: this.state.city,
+            allowUserState: this.state.state,
+            allowUserAdmin: this.state.checkmeout
+        }
+        console.log(temp);
+        const url = `http://localhost:8080/allowuser/new`;  
+        axios.post(url,temp)
             .then(res => {
             console.log(res.data)
       })

@@ -193,7 +193,7 @@ const NavigationBar = (props) => {
                     </MenuItemHome>
                     <Content>
                         <MenuItem href="/game"> Game </MenuItem>
-                        <MenuItem href="/favorite"> Favorite </MenuItem>
+                        {/* {(localStorage.getItem('user').admin === true) ? <MenuItem href="/favorite"> Favorite </MenuItem> : <MenuItem> </MenuItem>} */}
                         <MenuItem href="/translate"> Translate </MenuItem>
                         <MenuItem href="/sign_out"> Sign Out </MenuItem>
                         <MenuItem>
