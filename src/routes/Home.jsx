@@ -2,9 +2,6 @@ import React , { Component } from 'react';
 import styled from 'styled-components';
 
 
-//  this is just a temporary div. If you don't wanna to use styled components, you can 
-//  adjust your own components with explicit css files, using the 'className' attribute of the tags.
-//  In this case u should can the import in the second row
 
 const TemporaryMessage = styled.div `
     text-align: center;
@@ -15,11 +12,15 @@ const TemporaryMessage = styled.div `
 
 class Home extends Component {
 
+    componentDidMount(){
+      if(localStorage.getItem('guest') === "" && localStorage.getItem('email') === "" )
+        localStorage.setItem('signout',"");
+    }
     render() {
       //itt is ellenorzes, hogy valoban jo user-e a localstorage segitsegeve
       return (
         <div>
-          <TemporaryMessage> Wlcome in our page!</TemporaryMessage>
+          <TemporaryMessage> Welcome in our page!</TemporaryMessage>
         </div>
       );
     }

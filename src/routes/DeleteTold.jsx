@@ -68,55 +68,65 @@ class DeleteTold extends Component {
         }
     }
 
-    render(){
+    pagenotfound(){
+        this.props.history.push("/pagenotfound");
+    }
 
-        return (
-            <div>
-                <div className="form-row">
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-4">
-                        <label className="delLabHeader">Search told: </label>
-                        <input type="text" 
-                            className="form-control"  
-                            id="inputEmail4" 
-                            placeholder="Told"
-                            value={this.state.toldIn}
-                            onChange={ (e) => this.fieldChange('toldIn',e)}/> 
+    render(){
+        if(localStorage.getItem('admin') === "true" ){
+            return (
+                <div>
+                    <div className="form-row">
                     </div>
-                    <div className="form-group col-md-8">
-                        <div>
-                            <label className="delLabHeader">
-                            It is:
-                            </label>
+                    <div className="form-row">
+                        <div className="form-group col-md-4">
+                            <label className="delLabHeader">Search told: </label>
+                            <input type="text" 
+                                className="form-control"  
+                                id="inputEmail4" 
+                                placeholder="Told"
+                                value={this.state.toldIn}
+                                onChange={ (e) => this.fieldChange('toldIn',e)}/> 
                         </div>
-                        <div>
-                            <label> {this.state.toldOut}</label>
+                        <div className="form-group col-md-8">
+                            <div>
+                                <label className="delLabHeader">
+                                It is:
+                                </label>
+                            </div>
+                            <div>
+                                <label> {this.state.toldOut}</label>
+                            </div>
                         </div>
                     </div>
+                    <div className="form-row">
+                    </div>
+                    <div className="form-row">
+                        <button type="submit" 
+                            className="deletBut btn-primary"
+                            onClick={ (e) => this.search(e)}>
+                            Search
+                        </button>
+                        <button type="submit"   
+                            className="deletBut btn-primary"
+                            onClick={ () => this.delete()}>
+                            <i className="fa fa-trash" aria-hidden="false"></i>
+                            Delete
+                        </button>
+                        <button type="submit" 
+                            className="deletBut btn-primary"
+                            onClick={ () => this.back()}>
+                            Back
+                        </button>
+                    </div>
                 </div>
-                <div className="form-row">
-                </div>
-                <div className="form-row">
-                    <button type="submit" 
-                        className="deletBut btn-primary"
-                        onClick={ (e) => this.search(e)}>
-                        Search
-                    </button>
-                    <button type="submit"   
-                        className="deletBut btn-primary"
-                        onClick={ () => this.delete()}>
-                        <i className="fa fa-trash" aria-hidden="false"></i>
-                        Delete
-                    </button>
-                    <button type="submit" 
-                        className="deletBut btn-primary"
-                        onClick={ () => this.back()}>
-                        Back
-                    </button>
-                </div>
-            </div>
-        )
+            )
+        } else {
+            this.pagenotfound();
+            return(
+                <div></div>
+            )
+        }
     }
 }
 

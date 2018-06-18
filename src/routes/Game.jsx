@@ -122,84 +122,94 @@ class Game extends Component {
         this.props.history.push("/translate");
     }
 
+    pagenotfound(){
+        this.props.history.push("/pagenotfound");
+    }
 
     render(){
         /*setTimeout(() =>{},1000) */
-        const expressions = this.state.dictionary.map((current, index) => {
+        if(localStorage.getItem('email') !== "" ){
+            const expressions = this.state.dictionary.map((current, index) => {
+                return (
+                    <tr>
+                        <th className="rowsGame" scope="row">{index+1}</th>
+                        <td className="rowsGame" >{current.english}</td>
+                        <td className="rowsGame" >
+                            <input type="text" 
+                                className="form-control-game" 
+                                id="inputTranslated" 
+                                placeholder="Translated word!"
+                                key={index}
+                                value={this.state.hungarianExp[index]}
+                                onChange={ (e) => this.onChangeSolution(e, index)}/>
+                        </td>
+                        <td id="resulr"
+                            className="rowsGame"  
+                            align="center"  
+                            visibility="hidden"
+                            bgcolor = {this.state.color[index]}>
+                            {this.state.result[index]}
+                        </td>
+                    </tr>
+                    
+                )
+            })
             return (
-                <tr>
-                    <th className="rowsGame" scope="row">{index+1}</th>
-                    <td className="rowsGame" >{current.english}</td>
-                    <td className="rowsGame" >
-                        <input type="text" 
-                            className="form-control-game" 
-                            id="inputTranslated" 
-                            placeholder="Translated word!"
-                            key={index}
-                            value={this.state.hungarianExp[index]}
-                            onChange={ (e) => this.onChangeSolution(e, index)}/>
-                    </td>
-                    <td id="resulr"
-                        className="rowsGame"  
-                        align="center"  
-                        visibility="hidden"
-                        bgcolor = {this.state.color[index]}>
-                        {this.state.result[index]}
-                    </td>
-                </tr>
-                
-            )
-        })
-        return (
-            <from>
-                <div>
-                    <table className="table table-sm">
-                        <thead>
-                            <tr>
-                            <th className="tHeader" scope="col">Number</th>
-                            <th className="tHeader" scope="col">Word</th>
-                            <th className="tHeader" scope="col">Translated</th>
-                            <th className="tHeader" id="result" align="center" >{this.state.resultVisibil}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {expressions}
-                        </tbody>
-                    </table>
+                <from>
                     <div>
-                        <a className='game btn-primary' 
-                            onClick={() =>this.send()}> Send 
-                        </a>
-                        <Modal
-                            isOpen={this.state.modalIsOpen}
-                            //onAfterOpen={this.afterOpenModal()}
-                            style={customStyles}
-                            contentLabel="Results">
-                            <h3 ref={subtitle => this.subtitle = subtitle}>Your result</h3>
-                            <div>{this.state.results}</div>
-                            <form>
-                            <button onClick={() => this.closeModal()}> Close </button>
-                            <button onClick={() => this.back()}> End game </button>
-                            </form>
-                        </Modal>
-                        <Modal
-                            isOpen={this.state.modalFavorite}
-                            //onAfterOpen={this.afterOpenModal()}
-                            style={customStyles}
-                            contentLabel="Error">
-                            <h3 ref={subtitle => this.subtitle = subtitle}>You dont have favorite!</h3>
-                            <form>
-                            <button onClick={() => this.back()}> Oke </button>
-                            </form>
-                        </Modal>
-                        <a href={`/game`}
-                            className='game btn-primary'> New Game </a>
-                        <a href={`/translate`}
-                            className='gamedanger btn-danger'> Close </a>
+                        <table className="table table-sm">
+                            <thead>
+                                <tr>
+                                <th className="tHeader" scope="col">Number</th>
+                                <th className="tHeader" scope="col">Word</th>
+                                <th className="tHeader" scope="col">Translated</th>
+                                <th className="tHeader" id="result" align="center" >{this.state.resultVisibil}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {expressions}
+                            </tbody>
+                        </table>
+                        <div>
+                            <a className='game btn-primary' 
+                                onClick={() =>this.send()}> Send 
+                            </a>
+                            <Modal
+                                isOpen={this.state.modalIsOpen}
+                                //onAfterOpen={this.afterOpenModal()}
+                                style={customStyles}
+                                contentLabel="Results">
+                                <h3 ref={subtitle => this.subtitle = subtitle}>Your result</h3>
+                                <div>{this.state.results}</div>
+                                <form>
+                                <button onClick={() => this.closeModal()}> Close </button>
+                                <button onClick={() => this.back()}> End game </button>
+                                </form>
+                            </Modal>
+                            <Modal
+                                isOpen={this.state.modalFavorite}
+                                //onAfterOpen={this.afterOpenModal()}
+                                style={customStyles}
+                                contentLabel="Error">
+                                <h3 ref={subtitle => this.subtitle = subtitle}>You dont have favorite!</h3>
+                                <form>
+                                <button onClick={() => this.back()}> Oke </button>
+                                </form>
+                            </Modal>
+                            <a href={`/game`}
+                                className='game btn-primary'> New Game </a>
+                            <a href={`/translate`}
+                                className='gamedanger btn-danger'> Close </a>
+                        </div>
                     </div>
-                </div>
-            </from>
-        )
+                </from>
+            )
+        } else {
+            this.pagenotfound();
+            return(
+                <div></div>
+            )
+        }
     }
 }
 

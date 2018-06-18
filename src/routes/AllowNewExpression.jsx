@@ -128,56 +128,66 @@ class AllowNewExpression extends Component {
         }
     }
 
+    pagenotfound(){
+        this.props.history.push("/pagenotfound");
+    }
 
     render(){
-        return (
-            <form>
-                <div className="form-row">
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-6">
-                        <label className="allowLabel">Sign up user:</label>
-                        <div>
-                            <label >{this.state.user}</label>
+        if(localStorage.getItem('admin') === "true" ){
+            return (
+                <form>
+                    <div className="form-row">
+                    </div>
+                    <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <label className="allowLabel">Sign up user:</label>
+                            <div>
+                                <label >{this.state.user}</label>
+                            </div>
+                        </div>
+                        </div>
+                    <div className="form-row">
+                        <button type="button" 
+                            className="allowBut btn-primary"
+                            onClick={ () => this.acceptUser()}>
+                            Accept
+                        </button>
+                        <button type="button" 
+                            className="allowBut btn-primary"
+                            onClick={ () => this.refuseUser()}>
+                            Refuse
+                        </button> 
+                    </div> 
+                    <div className="form-row">
+                    </div>
+                    <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <label className="allowLabel">Told proposal:</label>
+                            <div>
+                                <label>{this.state.requestTold.told}</label>
+                            </div>
                         </div>
                     </div>
+                    <div className="form-row">
+                        <button type="button" 
+                            className="allowBut btn-primary"
+                            onClick={ () => this.acceptTold()}>
+                            Accept
+                        </button>
+                        <button type="button" 
+                            className="allowBut btn-primary"
+                            onClick={ () => this.refuseTold()}>
+                            Refuse
+                        </button> 
                     </div>
-                <div className="form-row">
-                    <button type="button" 
-                        className="allowBut btn-primary"
-                        onClick={ () => this.acceptUser()}>
-                        Accept
-                    </button>
-                    <button type="button" 
-                        className="allowBut btn-primary"
-                        onClick={ () => this.refuseUser()}>
-                        Refuse
-                    </button> 
-                </div> 
-                <div className="form-row">
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-6">
-                        <label className="allowLabel">Told proposal:</label>
-                        <div>
-                            <label>{this.state.requestTold.told}</label>
-                        </div>
-                    </div>
-                </div>
-                <div className="form-row">
-                    <button type="button" 
-                        className="allowBut btn-primary"
-                        onClick={ () => this.acceptTold()}>
-                        Accept
-                    </button>
-                    <button type="button" 
-                        className="allowBut btn-primary"
-                        onClick={ () => this.refuseTold()}>
-                        Refuse
-                    </button> 
-                </div>
-            </form>
-        )
+                </form>
+            )
+        } else {
+            this.pagenotfound();
+            return(
+                <div></div>
+            )
+        }
     }
 }
 

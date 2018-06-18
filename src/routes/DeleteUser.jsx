@@ -71,58 +71,68 @@ class DeleteUser extends Component {
     }
 
 
+    pagenotfound(){
+        this.props.history.push("/pagenotfound");
+    }
 
     render(){
-        return (
-            <form>
-            <div>
-                <div className="form-row ">
-                </div>
-                <div className="form-row ">
-                    <div className="form-group col-md-4">
-                        <label className="delLabHeader">Search by useremail: </label>
-                        <input type="email" 
-                            className="form-control"  
-                            id="inputEmail4" 
-                            placeholder="Email"
-                            value={this.state.userEmail}
-                            onChange={ (e) => this.fieldChange(e)}/> 
-                    </div>
-                    <div className="form-group col-md-8">
-                        <div>
-                            <label className="delLabHeader">
-                            He/she is it:
-                            </label>
-                        </div>
-                        <div>
-                            <label>{this.state.text}</label>
-                        </div>
-                    </div>
-                </div>
-                <div className="form-row ">
-                </div>
+        if(localStorage.getItem('admin') === "true" ){
+            return (
+                <form>
                 <div>
-                    <button type="button" 
-                        className="deletBut btn-primary"
-                        onClick={ () => this.search()}>
-                        Search
-                    </button>
-                    <button type="button" 
-                        className="deletBut btn-primary"
-                        onClick={ () => this.delete()}>
-                        <i className="fa fa-trash" aria-hidden="false"></i>
-                        Delete
-                    </button>
-                    <button type="submit" 
-                        className="deletBut btn-primary"
-                        onClick={ () => this.back()}>
-                        Back
-                    </button>
+                    <div className="form-row ">
+                    </div>
+                    <div className="form-row ">
+                        <div className="form-group col-md-4">
+                            <label className="delLabHeader">Search by useremail: </label>
+                            <input type="email" 
+                                className="form-control"  
+                                id="inputEmail4" 
+                                placeholder="Email"
+                                value={this.state.userEmail}
+                                onChange={ (e) => this.fieldChange(e)}/> 
+                        </div>
+                        <div className="form-group col-md-8">
+                            <div>
+                                <label className="delLabHeader">
+                                He/she is it:
+                                </label>
+                            </div>
+                            <div>
+                                <label>{this.state.text}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="form-row ">
+                    </div>
+                    <div>
+                        <button type="button" 
+                            className="deletBut btn-primary"
+                            onClick={ () => this.search()}>
+                            Search
+                        </button>
+                        <button type="button" 
+                            className="deletBut btn-primary"
+                            onClick={ () => this.delete()}>
+                            <i className="fa fa-trash" aria-hidden="false"></i>
+                            Delete
+                        </button>
+                        <button type="submit" 
+                            className="deletBut btn-primary"
+                            onClick={ () => this.back()}>
+                            Back
+                        </button>
+                    </div>
+                    
                 </div>
-                
-            </div>
-            </form>
-        )
+                </form>
+            )
+        } else {
+            this.pagenotfound();
+            return(
+                <div></div>
+            )
+        }
     }
 }
 

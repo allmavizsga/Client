@@ -33,7 +33,15 @@ class Translate extends Component {
     }
 
     componentDidMount(){
+        this.reload();
         this.loadTolds();
+    }
+
+    reload(){
+        if(localStorage.getItem('reload') === ""){
+            localStorage.setItem('reload', "true");
+            window.location.reload();
+        }
     }
 
     loadTolds(){
@@ -165,101 +173,112 @@ class Translate extends Component {
             axios.post(url)
                 .then(res => {})
         }
+        // temp.modalIsOpen = false;
         this.setState(temp);
+        //this.props.history.push('/translate');
     }
 
     onSubminNo(){
         console.log("Do nothing");
+        // const temp = this.setState;
+        // temp.modalIsOpen = false;
+        // this.setState(temp);
+        // this.props.history.push('/translate');
+    }
+
+    pagenotfound(){
+        this.props.history.push("/pagenotfound");
     }
 
     render(){
-        const expresson = this.state.tolds.map((current) => {
-            return ( 
-                <label> {current} </label>
-            )
-        })
-        return(
-        <form>
-            <div>
-                <div className="form-row">
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-4">
-                        <label className="translateLabel" for="inputWord">Word:</label>
-                        <input type="text" 
-                            className="form-control" 
-                            id="inputWord" 
-                            placeholder="Write the word!"
-                            value={this.state.word}
-                            onChange={ (e) => this.wordChange(e)}/>
+        if(localStorage.getItem('email') !== "" || localStorage.getItem('guest') !== ""){
+            const expresson = this.state.tolds.map((current) => {
+                return ( 
+                    <label> {current} </label>
+                )
+            })
+            return(
+            <form>
+                <div>
+                    <div className="form-row">
                     </div>
-                    <div className="form-group col-md-4">
-                        <label className="translateLabel" for="inputWord">Translated:</label>
-                        {/* <div>
-                            <label for="inputTranslated">{[this.state.translated]}</label>
-                        </div> */}
-                        <input type="text"
-                            readonly
-                            className="form-control"
-                            value={[this.state.translated]}/>
-                    </div>
-                    <div>
-                        <button type="button" 
-                            className="btn btn-primary"
-                            onClick={ (e) => this.onSubmitTranslation(e)}>
-                            Translation
-                        </button>
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-4">
-                        <button type="button" 
-                            className="btn btn-primary"
-                            onClick={ () => this.onSubmitFavorite()}>
-                            <i className="fa fa-star" aria-hidden="false"></i>
-                        </button>
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label className="translateLabel">Tolds:</label>
+                    <div className="form-row">
+                        <div className="form-group col-md-4">
+                            <label className="translateLabel">Word:</label>
+                            <input type="text" 
+                                className="form-control" 
+                                id="inputWord" 
+                                placeholder="Write the word!"
+                                value={this.state.word}
+                                onChange={ (e) => this.wordChange(e)}/>
+                        </div>
+                        <div className="form-group col-md-4">
+                            <label className="translateLabel">Translated:</label>
+                            <input type="text" readonly id="inputTold" className="form-control" value={this.state.translated}/>
+                        </div>
                         <div>
-                            {expresson} 
+                            <button type="button" 
+                                className="btn btn-primary"
+                                onClick={ (e) => this.onSubmitTranslation(e)}>
+                                Translation
+                            </button>
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div className="form-group col-md-4">
+                            <button type="button" 
+                                className="btn btn-primary"
+                                onClick={ () => this.onSubmitFavorite()}>
+                                <i className="fa fa-star" aria-hidden="false"></i>
+                            </button>
+                        </div>
+                        <div className="form-group col-md-6">
+                            <label className="translateLabel">Tolds:</label>
+                            <div>
+                                {expresson} 
+                            </div>
+                        </div>
+                    </div>
+                    <div className="form-row">
+                    </div>
+                    <div className="form-row">
+                        <div className="form-group col-md-4">
+                            <label className="translateLabel">Told:</label>
+                            <input type="text" 
+                                className="form-control" 
+                                id="inputAddNew" 
+                                placeholder="Write the told!"
+                                value={this.state.told}
+                                onChange={ (e) => this.addNewChange(e)}/>
+                        </div>
+                        <div>
+                            <button type="button" 
+                                className="btn btn-primary"
+                                onClick={ (e) => this.onSubmitNewTold(e)}>
+                                <i className="fa fa-edit" aria-hidden="false"></i>
+                                Add new
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div className="form-row">
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-4">
-                        <label className="translateLabel" for="inputAddNew">Told:</label>
-                        <input type="text" 
-                            className="form-control" 
-                            id="inputAddNew" 
-                            placeholder="Write the told!"
-                            value={this.state.told}
-                            onChange={ (e) => this.addNewChange(e)}/>
-                    </div>
-                    <div>
-                        <button type="button" 
-                            className="btn btn-primary"
-                            onClick={ (e) => this.onSubmitNewTold(e)}>
-                            <i className="fa fa-edit" aria-hidden="false"></i>
-                            Add new
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <Modal
-                isOpen={this.state.modalIsOpen}
-                style={customStyles}
-                contentLabel="Results">
-                <h3 ref={subtitle => this.subtitle = subtitle}>{this.state.quastion}</h3>
-                <form>
-                <button type="submit" onClick={() => this.onSubminNo()}> No </button>
-                <button onClick={() => this.onSubminYes()}> Yes </button>
-                </form>
-            </Modal>
-        </form>
-        )
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    style={customStyles}
+                    contentLabel="Results">
+                    <h3 ref={subtitle => this.subtitle = subtitle}>{this.state.quastion}</h3>
+                    <form>
+                    <button type="submit" onClick={() => this.onSubminNo()}> No </button>
+                    <button onClick={() => this.onSubminYes()}> Yes </button>
+                    </form>
+                </Modal>
+            </form>
+            )
+        } else {
+            this.pagenotfound();
+            return(
+                <div></div>
+            )
+        }
     }
 
 }

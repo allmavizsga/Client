@@ -29,42 +29,53 @@ class DeleteExpression extends Component {
         this.props.history.push("/");
     }
  
+    pagenotfound(){
+        this.props.history.push("/pagenotfound");
+    }
+
     render(){
-        return (
-            <form>
-                <div>
-                    <TemporaryMessage> Wath do you want to delete?</TemporaryMessage>
-                </div>
-                <div>
-                    <div className="form-row">
+        if(localStorage.getItem('admin') === "true" ){
+            return (
+                <form>
+                    <div>
+                        <TemporaryMessage> Wath do you want to delete?</TemporaryMessage>
                     </div>
-                    <div className="form-row">
-                        <button type="submit" 
-                            className="deletebutton btn-primary"
-                            onClick={ (e) => this.deleteUser(e)}>
-                            User
-                        </button>
-                        <button type="submit" 
-                            className="deletebutton btn-primary"
-                            onClick={ (e) => this.deleteWord(e)}>
-                            Word
-                        </button>
-                        <button type="submit" 
-                            className="deletebutton btn-primary"
-                            onClick={ (e) => this.deleteTold(e)}>
-                            Told
-                        </button>
+                    <div>
+                        <div className="form-row">
+                        </div>
+                        <div className="form-row">
+                            <button type="submit" 
+                                className="deletebutton btn-primary"
+                                onClick={ (e) => this.deleteUser(e)}>
+                                User
+                            </button>
+                            <button type="submit" 
+                                className="deletebutton btn-primary"
+                                onClick={ (e) => this.deleteWord(e)}>
+                                Word
+                            </button>
+                            <button type="submit" 
+                                className="deletebutton btn-primary"
+                                onClick={ (e) => this.deleteTold(e)}>
+                                Told
+                            </button>
+                        </div>
+                        <div className="form-row">
+                            <button type="submit" 
+                                className="deletebuttonback btn-primary"
+                                onClick={ (e) => this.back(e)}>
+                                Back
+                            </button>
+                        </div>
                     </div>
-                    <div className="form-row">
-                        <button type="submit" 
-                            className="deletebuttonback btn-primary"
-                            onClick={ (e) => this.back(e)}>
-                            Back
-                        </button>
-                    </div>
-                </div>
-            </form>
-        )
+                </form>
+            )
+        } else {
+            this.pagenotfound();
+            return(
+                <div></div>
+            )
+        }
     }
 }
 

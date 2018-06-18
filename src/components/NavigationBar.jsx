@@ -192,19 +192,24 @@ const NavigationBar = (props) => {
                          Dictionary
                     </MenuItemHome>
                     <Content>
-                        <MenuItem href="/game"> Game </MenuItem>
-                        {/* {(localStorage.getItem('user').admin === true) ? <MenuItem href="/favorite"> Favorite </MenuItem> : <MenuItem> </MenuItem>} */}
-                        <MenuItem href="/translate"> Translate </MenuItem>
-                        <MenuItem href="/sign_out"> Sign Out </MenuItem>
+                    {(localStorage.getItem('email') != "") ? <MenuItem href="/sign_out"> Sign Out </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('guest') != "") ? <MenuItem href="/sign_out"> Sign Out </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('email') === "") ? <MenuItem href="/sign_up"> Sign Up </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('email') != "") ? <MenuItem href="/game"> Game </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('email') != "") ? <MenuItem href="/favorite"> Favorite </MenuItem> : <MenuItem> </MenuItem>} 
+                        {(localStorage.getItem('email') != "") ? <MenuItem href="/translate"> Translate </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('guest') != "") ? <MenuItem href="/translate"> Translate </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('email') === "") ?
                         <MenuItem>
                             <DropDown>
                                 <DropBtn> Sign In </DropBtn>
                                 <DropDownContent>
                                     <DropDownItem href="/sign_in_user"> Sign in as a user  </DropDownItem>
-                                    <DropDownItem href="/sign_in_guest"> Sign in as a guest </DropDownItem>
+                                    {(localStorage.getItem('guest') === "") ? <DropDownItem href="/sign_in_guest"> Sign in as a guest </DropDownItem> : <DropDownItem> </DropDownItem>}
                                 </DropDownContent>
                             </DropDown>
-                        </MenuItem>
+                        </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('admin') === "true") ?
                         <MenuItem>
                             <DropDown>
                                 <DropBtn> Expressions </DropBtn>
@@ -214,8 +219,7 @@ const NavigationBar = (props) => {
                                     {/* <DropDownItem href="/idk"> I don't know </DropDownItem> */}
                                 </DropDownContent>
                             </DropDown>
-                        </MenuItem>
-                        <MenuItem href="/sign_up"> Sign Up </MenuItem>
+                        </MenuItem> : <MenuItem></MenuItem>}
                     </Content>
                 </Menu>
             </Nav>

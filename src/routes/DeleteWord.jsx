@@ -35,58 +35,70 @@ class DeleteWord extends Component {
         visibilityy.deleteButtonVisibility = true;
         this.setState({visibilityy});
     }
+
     delete(){
         console.log('Delete');
     }
-    render(){
 
-        return (
-            <div>
-                <div className="form-row ">
-                </div>
-                <div className="form-row ">
-                    <div className="form-group col-md-4">
-                        <label className="delLabHeader">Search word: </label>
-                        <input type="email" 
-                            className="form-control"  
-                            id="inputEmail4" 
-                            placeholder="Word"
-                            value={this.state.wordIn}
-                            onChange={ (e) => this.fieldChange(e)}/>
+    pagenotfound(){
+        this.props.history.push("/pagenotfound");
+    }
+
+    render(){
+        if(localStorage.getItem('admin') === "true" ){
+            return (
+                <div>
+                    <div className="form-row ">
                     </div>
-                    <div className="form-group col-md-8">
-                        <div>
-                            <label className="delLabHeader">
-                            It is:
-                            </label>
+                    <div className="form-row ">
+                        <div className="form-group col-md-4">
+                            <label className="delLabHeader">Search word: </label>
+                            <input type="email" 
+                                className="form-control"  
+                                id="inputEmail4" 
+                                placeholder="Word"
+                                value={this.state.wordIn}
+                                onChange={ (e) => this.fieldChange(e)}/>
                         </div>
-                        <div>
-                            <label> {this.state.wordOut}</label>
-                        </div>
-                    </div> 
+                        <div className="form-group col-md-8">
+                            <div>
+                                <label className="delLabHeader">
+                                It is:
+                                </label>
+                            </div>
+                            <div>
+                                <label> {this.state.wordOut}</label>
+                            </div>
+                        </div> 
+                    </div>
+                    <div className="form-row ">
+                    </div>
+                    <div className="form-row ">
+                            <button type="submit" 
+                                className="deletBut btn-primary"
+                                onClick={ (e) => this.search(e)}>
+                                Search
+                            </button>
+                            <button type="submit" 
+                                className="deletBut btn-primary"
+                                onClick={ () => this.delete()}>
+                                <i className="fa fa-trash" aria-hidden="false"></i>
+                                Delete
+                            </button>
+                            <button type="submit" 
+                                className="deletBut btn-primary"
+                                onClick={ () => this.back()}>
+                                Back
+                            </button>
+                    </div>
                 </div>
-                <div className="form-row ">
-                </div>
-                <div className="form-row ">
-                        <button type="submit" 
-                            className="deletBut btn-primary"
-                            onClick={ (e) => this.search(e)}>
-                            Search
-                        </button>
-                        <button type="submit" 
-                            className="deletBut btn-primary"
-                            onClick={ () => this.delete()}>
-                            <i className="fa fa-trash" aria-hidden="false"></i>
-                            Delete
-                        </button>
-                        <button type="submit" 
-                            className="deletBut btn-primary"
-                            onClick={ () => this.back()}>
-                            Back
-                        </button>
-                </div>
-            </div>
-        )
+            )
+        } else {
+            this.pagenotfound();
+            return(
+                <div></div>
+            )
+        }
     }
 }
 
