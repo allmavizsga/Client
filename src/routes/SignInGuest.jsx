@@ -49,7 +49,7 @@ class SignInGuest extends Component {
                 .then(res => {
                 console.log(res.data);
                 if(res.data.id != null){
-                    localStorage.setItem('guest',res.data.name);
+                    localStorage.setItem('guest',res.data.id);
                     localStorage.setItem('reloadsignout',"");
                     localStorage.setItem('signout',"true");
                     this.props.history.push("/translate");

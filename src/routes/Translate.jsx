@@ -24,7 +24,7 @@ class Translate extends Component {
             wordId: 1,
             told: '',
             tolds: [],
-            userEmail: 'dezsotokos@yahoo.com',
+            userEmail: localStorage.getItem('email'),
             modalIsOpen: false,
             favoriteButton: true,
             favorite: false,
@@ -49,7 +49,10 @@ class Translate extends Component {
             .then(res => {
                 if(res.data[0] != null){
                 const temp = this.state;
-                temp.tolds = res.data.map( obj => obj.told);
+                temp.tolds = res.data.map( obj => { 
+                    const temp = obj.told;
+                    return(temp)
+                });
                 this.setState(temp);
                 }
     })
@@ -193,8 +196,9 @@ class Translate extends Component {
     render(){
         if(localStorage.getItem('email') !== "" || localStorage.getItem('guest') !== ""){
             const expresson = this.state.tolds.map((current) => {
+                const temp = " ";
                 return ( 
-                    <label> {current} </label>
+                    <label> {current}{temp} </label>
                 )
             })
             return(
@@ -224,42 +228,52 @@ class Translate extends Component {
                             </button>
                         </div>
                     </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-4">
-                            <button type="button" 
-                                className="btn btn-primary"
-                                onClick={ () => this.onSubmitFavorite()}>
-                                <i className="fa fa-star" aria-hidden="false"></i>
-                            </button>
-                        </div>
-                        <div className="form-group col-md-6">
-                            <label className="translateLabel">Tolds:</label>
-                            <div>
-                                {expresson} 
+                    {(localStorage.getItem('guest') === "") ?
+                    <div> 
+                        <div className="form-row">
+                            <div className="form-group col-md-4">
+                                <button type="button" 
+                                    className="btn btn-primary"
+                                    onClick={ () => this.onSubmitFavorite()}>
+                                    <i className="fa fa-star" aria-hidden="false"></i>
+                                </button>
                             </div>
+                            <div className="form-group col-md-6">
+                                <label className="translateLabel">Tolds:</label>
+                                <div>
+                                    {expresson} 
+                                </div>
+                            </div>
+                        </div> 
+                        <div className="form-row">
                         </div>
-                    </div>
-                    <div className="form-row">
-                    </div>
-                    <div className="form-row">
-                        <div className="form-group col-md-4">
-                            <label className="translateLabel">Told:</label>
-                            <input type="text" 
-                                className="form-control" 
-                                id="inputAddNew" 
-                                placeholder="Write the told!"
-                                value={this.state.told}
-                                onChange={ (e) => this.addNewChange(e)}/>
-                        </div>
-                        <div>
-                            <button type="button" 
-                                className="btn btn-primary"
-                                onClick={ (e) => this.onSubmitNewTold(e)}>
-                                <i className="fa fa-edit" aria-hidden="false"></i>
-                                Add new
-                            </button>
-                        </div>
-                    </div>
+                        <div className="form-row">
+                            <div className="form-group col-md-4">
+                                <label className="translateLabel">Told:</label>
+                                <input type="text" 
+                                    className="form-control" 
+                                    id="inputAddNew" 
+                                    placeholder="Write the told!"
+                                    value={this.state.told}
+                                    onChange={ (e) => this.addNewChange(e)}/>
+                            </div>
+                            <div>
+                                <button type="button" 
+                                    className="btn btn-primary"
+                                    onClick={ (e) => this.onSubmitNewTold(e)}>
+                                    <i className="fa fa-edit" aria-hidden="false"></i>
+                                    Add new
+                                </button>
+                            </div>
+                        </div> 
+                    </div>: <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <label className="translateLabel">Tolds:</label>
+                                    <div>
+                                        {expresson} 
+                                    </div>
+                                </div>
+                            </div>}
                 </div>
                 <Modal
                     isOpen={this.state.modalIsOpen}

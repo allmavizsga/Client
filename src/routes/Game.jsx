@@ -30,7 +30,7 @@ class Game extends Component {
             numberOfFavoriteInGame: 2,
             resultVisibil: '',
             modalFavorite: false,
-            userEmail: 'dezsotokos@yahoo.com'
+            userEmail: localStorage.getItem('email')
         }
     }
 
@@ -68,13 +68,15 @@ class Game extends Component {
             console.log(object.hungarian+' '+this.state.hungarianExp[index]+' '+index);
             if(object.hungarian === this.state.hungarianExp[index]){
                 temp.results = temp.results +1;
+                temp.question = temp.question +1;
                 temp.result[index] = "It is good";
                 return '#00FF00'
             } else {
                 temp.result[index] = object.hungarian;
+                temp.question = temp.question +1;
                 return '#FF0000'
             }
-            temp.question = temp.question +1;
+            
         })
         temp.results = temp.results+' in '+temp.question;
         temp.resultVisibil = "Result";

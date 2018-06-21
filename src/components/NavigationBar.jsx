@@ -118,7 +118,7 @@ const Nav = styled.div `
 `;
 
 
-const DropDownItem = styled.div `
+const DropDownItem = styled.a `
     background: #2F4F4F;
     float: none;
     color: white;
@@ -142,7 +142,7 @@ const DropDownItem = styled.div `
     }
     &:active {
         text-decoration: none;
-    }a bejelentkezest nem oldottam meg 
+    }
 `;
 
 
@@ -192,13 +192,13 @@ const NavigationBar = (props) => {
                          Dictionary
                     </MenuItemHome>
                     <Content>
-                    {(localStorage.getItem('email') != "") ? <MenuItem href="/sign_out"> Sign Out </MenuItem> : <MenuItem> </MenuItem>}
-                        {(localStorage.getItem('guest') != "") ? <MenuItem href="/sign_out"> Sign Out </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('email') !== "") ? <MenuItem href="/sign_out"> Sign Out </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('guest') !== "") ? <MenuItem href="/sign_out"> Sign Out </MenuItem> : <MenuItem> </MenuItem>}
                         {(localStorage.getItem('email') === "") ? <MenuItem href="/sign_up"> Sign Up </MenuItem> : <MenuItem> </MenuItem>}
-                        {(localStorage.getItem('email') != "") ? <MenuItem href="/game"> Game </MenuItem> : <MenuItem> </MenuItem>}
-                        {(localStorage.getItem('email') != "") ? <MenuItem href="/favorite"> Favorite </MenuItem> : <MenuItem> </MenuItem>} 
-                        {(localStorage.getItem('email') != "") ? <MenuItem href="/translate"> Translate </MenuItem> : <MenuItem> </MenuItem>}
-                        {(localStorage.getItem('guest') != "") ? <MenuItem href="/translate"> Translate </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('email') !== "") ? <MenuItem href="/game"> Game </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('email') !== "") ? <MenuItem href="/favorite"> Favorite </MenuItem> : <MenuItem> </MenuItem>} 
+                        {(localStorage.getItem('email') !== "") ? <MenuItem href="/translate"> Translate </MenuItem> : <MenuItem> </MenuItem>}
+                        {(localStorage.getItem('guest') !== "") ? <MenuItem href="/translate"> Translate </MenuItem> : <MenuItem> </MenuItem>}
                         {(localStorage.getItem('email') === "") ?
                         <MenuItem>
                             <DropDown>
