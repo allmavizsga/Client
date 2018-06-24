@@ -28,11 +28,11 @@ class DeleteTold extends Component {
         });
         
         this.setState(newState);
-        console.log(newState)
+        //console.log(newState)
     }
 
     search(e){
-        console.log('Seaching');
+        //console.log('Seaching');
         const url = `http://localhost:8080/told/ptold`;
         axios.post(url,this.state.toldIn)
             .then(res => {
@@ -43,7 +43,7 @@ class DeleteTold extends Component {
                     temp.toldOut = res.data.told;
                     temp.deleteButtonVisibility = true;
                     this.setState(temp);
-                    console.log(temp);
+                    //console.log(temp);
                 }else{
                     const temp = this.state;
                     temp.toldOut = 'This told do not exist!';

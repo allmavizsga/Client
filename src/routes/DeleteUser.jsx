@@ -28,22 +28,22 @@ class DeleteUser extends Component {
         userEm.text= '';
         userEm.deleteButtonVisibility = false;
         this.setState(userEm);
-        console.log(userEm)
+        //console.log(userEm)
     }
 
     search(){
-        console.log('Seaching');
+        //console.log('Seaching');
         const url = `http://localhost:8080/users/`+this.state.userEmail;
         axios.get(url)
             .then(res => {
-                console.log(res.data);
+                //console.log(res.data);
                 if(res.data.email != null) {
                     const temp = this.state;
                     temp.text = 'Email: '+res.data.email+' Address: '+res.data.address+', '+res.data.town;+', '+res.data.state;
                     temp.respons = true,
                     temp.deleteButtonVisibility = true;
                     this.setState(temp);
-                    console.log(temp);
+                    //console.log(temp);
                 }else{
                     const temp = this.state;
                     temp.text = 'This user do not exist!';
@@ -56,7 +56,7 @@ class DeleteUser extends Component {
     }
 
     delete(){
-        console.log("Delete user");
+        //console.log("Delete user");
         if(this.state.deleteButtonVisibility){
             const url = `http://localhost:8080/users/`+this.state.userEmail;
             axios.delete(url)

@@ -17,7 +17,6 @@ class Home extends Component {
         localStorage.setItem('signout',"");
     }
     render() {
-      //itt is ellenorzes, hogy valoban jo user-e a localstorage segitsegeve
       return (
         <div>
           <TemporaryMessage> Welcome in our page!</TemporaryMessage>

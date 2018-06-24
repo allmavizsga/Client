@@ -19,7 +19,6 @@ class Favorite extends Component {
         super(props);
         this.state = {
             dictionary:[],
-            modalIsOpen: false,
             userEmail: localStorage.getItem('email')
         }
     }
@@ -29,20 +28,20 @@ class Favorite extends Component {
       }
     
     loadFavorites(){
-        console.log(this.state.userEmail);
+        //console.log(this.state.userEmail);
         const url = `http://localhost:8080/favorite/`+this.state.userEmail;  
         axios.get(url)
             .then(res => {
-            console.log(res.data);
+            //console.log(res.data);
             if(res.data[0] !=null){
-                console.log("Bele");
+                //console.log("Bele");
                 const temp = this.state;
                 temp.dictionary = res.data.map( obj => obj.word);
                 this.setState(temp);
-                console.log(temp);
+                //console.log(temp);
                 
             } else{
-                console.log("Nem");
+                //console.log("Nem");
                 this.donthavefavorite();
             }
       })
@@ -68,8 +67,8 @@ class Favorite extends Component {
                 return (
                     <tr>
                         <th className="rowsGame" scope="row">{index+1}</th>
-                        <td className="rowsGame" >{current.english}</td>
                         <td className="rowsGame" >{current.hungarian}</td>
+                        <td className="rowsGame" >{current.english}</td>
                     </tr>
                     
                 )

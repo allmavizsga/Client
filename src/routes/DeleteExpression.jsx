@@ -11,17 +11,17 @@ const TemporaryMessage = styled.div `
 class DeleteExpression extends Component {
 
     deleteUser(e){
-        console.log("The delete user was clicked!");
+        //console.log("The delete user was clicked!");
         this.props.history.push("/delete_expression/user");
     }
 
     deleteWord(e){
-        console.log("The delete word was clicked!");
+        //console.log("The delete word was clicked!");
         this.props.history.push("/delete_expression/word");
     }
 
     deleteTold(e){
-        console.log("The delete told was clicked!");
+        //console.log("The delete told was clicked!");
         this.props.history.push("/delete_expression/told");
     }
 
@@ -38,7 +38,7 @@ class DeleteExpression extends Component {
             return (
                 <form>
                     <div>
-                        <TemporaryMessage> Wath do you want to delete?</TemporaryMessage>
+                        <TemporaryMessage> What do you want to delete?</TemporaryMessage>
                     </div>
                     <div>
                         <div className="form-row">
@@ -49,23 +49,24 @@ class DeleteExpression extends Component {
                                 onClick={ (e) => this.deleteUser(e)}>
                                 User
                             </button>
-                            <button type="submit" 
+                            {/* <button type="submit" 
                                 className="deletebutton btn-primary"
                                 onClick={ (e) => this.deleteWord(e)}>
                                 Word
-                            </button>
+                            </button> */}
                             <button type="submit" 
                                 className="deletebutton btn-primary"
                                 onClick={ (e) => this.deleteTold(e)}>
                                 Told
                             </button>
-                        </div>
-                        <div className="form-row">
                             <button type="submit" 
-                                className="deletebuttonback btn-primary"
+                                className="deletebutton btn-primary"
                                 onClick={ (e) => this.back(e)}>
                                 Back
                             </button>
+                        </div>
+                        <div className="form-row">
+                            
                         </div>
                     </div>
                 </form>

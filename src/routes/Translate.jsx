@@ -21,7 +21,7 @@ class Translate extends Component {
         this.state = {
             word: 'szia',
             translated: 'hello',
-            wordId: 1,
+            wordId: 72730,
             told: '',
             tolds: [],
             userEmail: localStorage.getItem('email'),
@@ -65,7 +65,7 @@ class Translate extends Component {
         newState.favorite = false;
         newState.favoriteButton = false;
         this.setState(newState);
-        console.log(newState);
+        //console.log(newState);
     } 
 
     addNewChange(event){
@@ -73,17 +73,16 @@ class Translate extends Component {
             ['told']: event.target.value
         });
         this.setState(newState);
-        console.log(newState);
+        //console.log(newState);
     }
 
     onSubmitTranslation(e){
-        console.log("The translation button was clicked!");
         const url = `http://localhost:8080/word/hu/`+this.state.word;  
         axios.get(url)
             .then(res => {
-                console.log(res.data[0].wordId);
+                //console.log(res.data[0].wordId);
                 if(res.data[0] != null){
-                    console.log("fordit");
+                    //console.log("fordit");
                     const temp = this.state;
                     temp.favoriteButton = true;
                     temp.wordId = res.data[0].wordId;
@@ -100,11 +99,10 @@ class Translate extends Component {
         axios.get(`http://localhost:8080/told/tolds/`+this.state.wordId)
             .then(res => {
                 if(res.data[0] !=null){
-                    console.log(res.data);
                     const temp = this.state;
                     temp.tolds = res.data.map( obj => obj.told);
                     this.setState(temp);
-                    console.log(temp);
+                    //console.log(temp);
                 }
                      
         })
@@ -115,9 +113,6 @@ class Translate extends Component {
         axios.get(`http://localhost:8080/favorite/`+this.state.userEmail+'/'+this.state.wordId)
             .then(res => {
                 if(res.data !=""){
-                    console.log("Kedvenc1  ");
-                    console.log(res.data);
-                    console.log("Kedvenc   ");
                     const temp = this.state;
                     temp.favorite = true;
                     this.setState(temp);
@@ -128,7 +123,7 @@ class Translate extends Component {
 
     onSubmitNewTold(e){
         if(this.state.told != ''){
-            console.log(this.state);
+            //console.log(this.state);
             const temp ={
                 told: this.state.told,
                 wordId: this.state.wordId,
@@ -137,14 +132,13 @@ class Translate extends Component {
             axios.post(`http://localhost:8080/allowtold/newallowtold`,temp)
                 .then(res => {
                     if(res.data !=null){
-                        console.log("Beszurva a szo");
                         const nulltold = Object.assign(this.state, {["told"]: ""});
                         this.setState(nulltold);
                     }
                         
             })
-        }else{
-            console.log("ures mondat");
+        // }else{
+        //     console.log("ures mondat");
         }
     }
 
@@ -165,13 +159,13 @@ class Translate extends Component {
         const temp = this.state;
         if (temp.favorite){
             temp.favorite = false;
-            console.log("Delete in favorite");
+            //console.log("Delete in favorite");
             const url = `http://localhost:8080/favorite/`+this.state.userEmail+'/'+this.state.wordId;  
             axios.delete(url)
                 .then(res => {})
         } else {
             temp.favorite = true;
-            console.log("Add to favorite");
+            //console.log("Add to favorite");
             const url = `http://localhost:8080/favorite/`+this.state.userEmail+'/'+this.state.wordId;  
             axios.post(url)
                 .then(res => {})

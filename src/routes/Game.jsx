@@ -27,7 +27,7 @@ class Game extends Component {
             result: [],
             results: 0,
             question: 0,
-            numberOfFavoriteInGame: 2,
+            numberOfFavoriteInGame: 10,
             resultVisibil: '',
             modalFavorite: false,
             userEmail: localStorage.getItem('email')
@@ -42,18 +42,16 @@ class Game extends Component {
         const url = `http://localhost:8080/favorite/game/`+this.state.userEmail+'/'+this.state.numberOfFavoriteInGame;  
         axios.get(url)
             .then(res => {
-            console.log(res.data);
+            //console.log(res.data);
             if(res.data[0] !=null){
-                console.log("Bele");
                 const temp = this.state;
                 temp.results = 0;
                 temp.question = 0;
                 temp.dictionary = res.data.map( obj => obj.word);
                 this.setState(temp);
-                console.log(temp);
+                //console.log(temp);
                 
             } else{
-                console.log("Nem");
                 const temp = Object.assign(this.state,{modalFavorite:true});
                 this.setState(temp);
             }
@@ -61,11 +59,9 @@ class Game extends Component {
     }
 
     send(e){
-        console.log(this.state);
-
         const temp = this.state;
         temp.color = temp.dictionary.map( (object, index) => {
-            console.log(object.hungarian+' '+this.state.hungarianExp[index]+' '+index);
+            //console.log(object.hungarian+' '+this.state.hungarianExp[index]+' '+index);
             if(object.hungarian === this.state.hungarianExp[index]){
                 temp.results = temp.results +1;
                 temp.question = temp.question +1;
@@ -88,11 +84,11 @@ class Game extends Component {
     }
 
     onChangeSolution(event, index){
-        console.log('index: ', index);
+        //console.log('index: ', index);
         const temp = this.state.hungarianExp;
         temp[index] = event.target.value;
         this.setState({hungarianExp: temp});
-        console.log(this.state.hungarianExp)
+        //console.log(this.state.hungarianExp)
     }
     closeModal() {
         const temp = Object.assign(this.state, {modalIsOpen: false});

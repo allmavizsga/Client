@@ -39,15 +39,14 @@ class SignInUser extends Component {
             [field]: event.target.value
         });
         this.setState(newState);
-        console.log(newState);
+        //console.log(newState);
     }
 
-    onSubmit(e){
-        console.log("The submit button was clicked!");   
+    onSubmit(e){ 
         const url = `http://localhost:8080/users/`+this.state.email+'/'+this.state.password;  
         axios.get(url)
             .then(res => {
-            console.log(res.data);
+            //console.log(res.data);
             if(res.data.email != null){
                 if(res.data.admin){
                     localStorage.setItem('admin', "true");

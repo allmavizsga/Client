@@ -42,18 +42,17 @@ class SignUp extends Component {
                 [field]: event.target.checked
             });
             this.setState(newState1);
-            console.log(newState1);
+            //console.log(newState1);
         } else {
             const newState2 = Object.assign(this.state, {
                 [field]: event.target.value
             });
             this.setState(newState2);
-            console.log(newState2);
+            //console.log(newState2);
         }
     }
 
     onSubmit(e){
-        console.log("The submit button was clicked!"); 
         const temp= {
             allowUserEmail: this.state.email,
             allowUserpassword: this.state.password,
@@ -62,11 +61,11 @@ class SignUp extends Component {
             allowUserState: this.state.state,
             allowUserAdmin: this.state.checkmeout
         }
-        console.log(temp);
+        //console.log(temp);
         const url = `http://localhost:8080/allowuser/new`;  
         axios.post(url,temp)
             .then(res => {
-            console.log(res.data)
+            //console.log(res.data)
         });
 
         const reset = this.state;

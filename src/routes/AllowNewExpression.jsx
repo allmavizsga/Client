@@ -39,9 +39,7 @@ class AllowNewExpression extends Component {
         axios.get(`http://localhost:8080/allowuser/first`)
         .then(res => {
             const temp = this.state;
-            console.log(res.data);
             if(res.data.email != null){
-                console.log(res.data);
                 temp.userAllow = true;
                 temp.requestUser.email = res.data.email;
                 temp.user = res.data.email + " " + res.data.address + " " + res.data.town + " " + res.data.state;
@@ -62,7 +60,7 @@ class AllowNewExpression extends Component {
             if(res.data.allowToldId != null){
                 temp.toldAllow = true;
                 temp.requestTold.toldId = res.data.allowToldId;
-                temp.requestTold.told = res.data.allowTold;
+                temp.requestTold.told ="Told: "+ res.data.allowTold+" User: "+res.data.user.email+" Hungarian: "+res.data.word.hungarian;
             }else{
                 temp.requestTold.told = "Don't have any request!";
                 temp.toldAllow = false;
@@ -99,8 +97,8 @@ class AllowNewExpression extends Component {
                     console.log(res.data);
                     this.newUserRequest();
                 })
-        }else{
-            console.log("Elfogadasi user HIBA");
+        // }else{
+        //     console.log("Elfogadasi user HIBA");
         }
     }
 
@@ -111,8 +109,8 @@ class AllowNewExpression extends Component {
                 .then(res => { 
                     this.newToldRequest();
                 })
-        }else{
-            console.log("Visszautasitva user HIBA");
+        // }else{
+        //     console.log("Visszautasitva user HIBA");
         }
     }
     
@@ -123,8 +121,8 @@ class AllowNewExpression extends Component {
                 .then(res => { 
                     this.newToldRequest();
                 })
-        }else{
-            console.log("Elfogadasi user HIBA");
+        // }else{
+        //     console.log("Elfogadasi user HIBA");
         }
     }
 

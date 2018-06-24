@@ -37,17 +37,15 @@ class SignInGuest extends Component {
             [field]: event.target.value
         });
         this.setState(newState);
-        console.log(newState);
+        //console.log(newState);
     }
 
     onSubmit(e){
-        console.log("The submit button was clicked!");
-        console.log("The submit button was clicked!");
         if(this.state.guestname !== ""){
             const url = `http://localhost:8080/guest/`+this.state.guestname;  
             axios.post(url)
                 .then(res => {
-                console.log(res.data);
+                //console.log(res.data);
                 if(res.data.id != null){
                     localStorage.setItem('guest',res.data.id);
                     localStorage.setItem('reloadsignout',"");

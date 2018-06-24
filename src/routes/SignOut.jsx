@@ -14,7 +14,7 @@ class SignOut extends Component {
         if(localStorage.getItem('guest') !== ""){
             axios.delete(`http://localhost:8080/guest/`+localStorage.getItem('guest'))
                 .then(res => {
-                    console.log("Torol vendeg");
+                    //console.log("Torol vendeg");
                         
             })
         }
